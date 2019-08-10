@@ -2,7 +2,7 @@
 
 namespace Admin.Controllers
 {
-    public class NewsController : Controller
+    public class LoginController : Controller
     {
         public IActionResult Index()
         {
