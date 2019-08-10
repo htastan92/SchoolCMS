@@ -1,10 +1,70 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using Data;
+using Entities;
 
 namespace Service
 {
     public class FormService
     {
+        private readonly UnitOfWork _unitOfWork;
+
+        public FormService(UnitOfWork unitOfWork)
+        {
+            this._unitOfWork = unitOfWork;
+        }
+
+        public Form GetAdmin(int id)
+        {
+            using (var db = new SchoolContext())
+            {
+                return db.Forms.FirstOrDefault(f => f.Id == id);
+            }
+        }
+
+        public IList<Form> GetAllAdmin()
+        {
+            using (var db = new SchoolContext())
+            {
+                return db.Forms.ToList();
+            }
+        }
+        public int New(Form form)
+        {
+            using (var db = new SchoolContext())
+            {
+                db.Forms.Add(form);
+                _unitOfWork.SaveChanges();
+            }
+
+            return form.Id;
+        }
+
+        public int Edit(Form form)
+        {
+            using (var db=new SchoolContext())
+            {
+                db.Forms.Update(form);
+                _unitOfWork.SaveChanges();
+            }
+
+            return form.Id;
+        }
+
+        public void Delete(int id)
+        {
+            using (var db = new SchoolContext())
+            {
+                var form = db.Forms.FirstOrDefault(f => f.Id == id);
+                if (form!=null)
+                {
+                    db.Forms.Remove(form);
+                    _unitOfWork.SaveChanges();
+                }
+            }
+        }
+
     }
 }
