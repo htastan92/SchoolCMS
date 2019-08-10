@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Admin.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Admin.Controllers
 {
@@ -7,6 +8,14 @@ namespace Admin.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        public IActionResult Index(SettingsViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+                return View(viewModel);
+
+            return RedirectToAction("Index");
         }
     }
 }

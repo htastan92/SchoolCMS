@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Admin.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Admin.Controllers
@@ -11,6 +8,20 @@ namespace Admin.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        public IActionResult Index(AccountViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+                return View(viewModel);
+
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Logout()
+        {
+            // Kill session and remove session from database.
+            return RedirectToAction("Index", "Login");
         }
     }
 }

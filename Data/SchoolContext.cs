@@ -8,7 +8,7 @@ namespace Data
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=")
+            optionsBuilder.UseSqlServer("Server=94.73.170.20;Database=u7801466_dbTestx;User Id=u7801466_userE86;Password=IDyk81F0;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
