@@ -18,7 +18,5 @@ namespace Admin.Models
         public string Telephone { get; set; }
         public string Fax { get; set; }
         public string EmailAddress { get; set; }
-
-
     }
 }

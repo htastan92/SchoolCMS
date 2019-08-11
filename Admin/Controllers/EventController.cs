@@ -1,13 +1,26 @@
 ﻿using Admin.Models;
+using Entities;
 using Microsoft.AspNetCore.Mvc;
+using Service;
 
 namespace Admin.Controllers
 {
     public class EventController : Controller
     {
+        private readonly EventService _eventService;
+
+        public EventController(EventService eventService)
+        {
+            _eventService = eventService;
+        }
         public IActionResult Index()
         {
-            return View();
+            EventListViewModel viewModel = new EventListViewModel()
+            {
+                Events = _eventService.GetAllAdmin()
+            };
+
+            return View(viewModel);
         }
 
         public IActionResult New()
@@ -19,16 +32,46 @@ namespace Admin.Controllers
         {
             if (!ModelState.IsValid)
                 return View(viewModel);
-
+            Event newEvent = new Event()
+            {
+                Name = viewModel.Name,
+                Description = viewModel.Description,
+                Slug = viewModel.Slug,
+                EditorContent = viewModel.EditorContent,
+                Image = null,
+                Status = null,
+                Location = viewModel.Location,
+                StartDate = viewModel.StartDate,
+                EndDate = viewModel.EndDate,
+                Campus = null
+            };
+            _eventService.New(newEvent);
             return RedirectToAction("Index");
         }
 
         public IActionResult Edit(int? id)
         {
-            if (id == null)
+            if (!ModelState.IsValid)
                 return RedirectToAction("Index");
 
-            return View();
+            var findEvent = _eventService.GetAdmin(id);
+            if (findEvent == null)
+                return RedirectToAction("Index");
+
+            EventEditViewModel viewModel = new EventEditViewModel()
+            {
+                Id = findEvent.Id,
+                Name = findEvent.Name,
+                Description = findEvent.Description,
+                EditorContent = findEvent.EditorContent,
+                Slug = findEvent.Slug,
+                ImageUrl = null,
+                Location = findEvent.Slug,
+                StartDate = findEvent.StartDate,
+                EndDate = findEvent.EndDate,
+                
+            };
+            return View(viewModel);
         }
         [HttpPost]
         public IActionResult Edit(EventEditViewModel viewModel)
@@ -36,6 +79,19 @@ namespace Admin.Controllers
             if (!ModelState.IsValid)
                 return View(viewModel);
 
+            Event editedEvent = new Event()
+            {
+                Id = viewModel.Id,
+                Name = viewModel.Name,
+                Description = viewModel.Description,
+                EditorContent = viewModel.EditorContent,
+                Slug = viewModel.Slug,
+                Image = null,
+                Location = viewModel.Location,
+                StartDate = viewModel.StartDate,
+                EndDate = viewModel.EndDate
+            };
+            _eventService.Edit(editedEvent);
             return RedirectToAction("Index");
         }
 
@@ -43,7 +99,7 @@ namespace Admin.Controllers
         {
             if (id == null)
                 return RedirectToAction("Index");
-            // Publish
+            _eventService.Publish(id);
             return RedirectToAction("Index");
         }
 
@@ -51,7 +107,7 @@ namespace Admin.Controllers
         {
             if (id == null)
                 return RedirectToAction("Index");
-            // Draft
+            _eventService.Draft(id);
             return RedirectToAction("Index");
         }
 
@@ -59,7 +115,7 @@ namespace Admin.Controllers
         {
             if (id == null)
                 return RedirectToAction("Index");
-            // Remove
+            _eventService.Remove(id);
             return RedirectToAction("Index");
         }
     }

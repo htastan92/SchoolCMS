@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using Entities;
 
 namespace Admin.Models
 {
     public class EventListViewModel
     {
+        public IList<Event>Events { get; set; }
     }
 }
