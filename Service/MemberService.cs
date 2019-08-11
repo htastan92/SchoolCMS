@@ -5,61 +5,61 @@ using Entities;
 
 namespace Service
 {
-    public class MenuService
+    public class MemberService
     {
         private readonly UnitOfWork _unitOfWork;
 
-        public MenuService(UnitOfWork unitOfWork)
+        public MemberService(UnitOfWork unitOfWork)
         {
             this._unitOfWork = unitOfWork;
         }
 
-        public MenuElement Get(int id)
+        public Member Get(int id)
         {
             using (var db = new SchoolContext())
             {
-                return db.MenuElements.FirstOrDefault(m => m.Id == id);
+                return db.Members.FirstOrDefault(m => m.Id == id);
             }
         }
 
-        public IList<MenuElement> GetAll()
+        public IList<Member> GetAll()
         {
             using (var db = new SchoolContext())
             {
-                return db.MenuElements.ToList();
+                return db.Members.ToList();
             }
         }
 
-        public int New(MenuElement menuElement)
+        public int New(Member member)
         {
             using (var db = new SchoolContext())
             {
-                db.MenuElements.Add(menuElement);
+                db.Members.Add(member);
                 _unitOfWork.SaveChanges();
             }
 
-            return menuElement.Id;
+            return member.Id;
         }
 
-        public int Edit(MenuElement menuElement)
+        public int Edit(Member member)
         {
-            using (var db = new SchoolContext())
+            using (var db=new SchoolContext())
             {
-                db.MenuElements.Update(menuElement);
+                db.Members.Update(member);
                 _unitOfWork.SaveChanges();
             }
 
-            return menuElement.Id;
+            return member.Id;
         }
 
         public void Delete(int id)
         {
             using (var db = new SchoolContext())
             {
-                var menuElement = db.MenuElements.FirstOrDefault(m=>m.Id==id);
-                if (menuElement!=null)
+                var member = db.Members.FirstOrDefault(m=>m.Id==id);
+                if (member!=null)
                 {
-                    db.MenuElements.Remove(menuElement);
+                    db.Members.Remove(member);
                     _unitOfWork.SaveChanges();
                 }
             }

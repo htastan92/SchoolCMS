@@ -1,66 +1,67 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Data;
 using Entities;
 
 namespace Service
 {
-    public class MenuService
+    public class ImageService
     {
         private readonly UnitOfWork _unitOfWork;
 
-        public MenuService(UnitOfWork unitOfWork)
+        public ImageService(UnitOfWork unitOfWork)
         {
             this._unitOfWork = unitOfWork;
         }
 
-        public MenuElement Get(int id)
+        public Image Get(int id)
         {
             using (var db = new SchoolContext())
             {
-                return db.MenuElements.FirstOrDefault(m => m.Id == id);
+                return db.Images.FirstOrDefault(i => i.Id == id);
             }
         }
 
-        public IList<MenuElement> GetAll()
+        public IList<Image> GetAll()
         {
             using (var db = new SchoolContext())
             {
-                return db.MenuElements.ToList();
+                return db.Images.ToList();
             }
         }
 
-        public int New(MenuElement menuElement)
+        public int New(Image image)
         {
             using (var db = new SchoolContext())
             {
-                db.MenuElements.Add(menuElement);
+                db.Images.Add(image);
                 _unitOfWork.SaveChanges();
             }
 
-            return menuElement.Id;
+            return image.Id;
         }
 
-        public int Edit(MenuElement menuElement)
+        public int Edit(Image image)
         {
             using (var db = new SchoolContext())
             {
-                db.MenuElements.Update(menuElement);
+                db.Images.Update(image);
                 _unitOfWork.SaveChanges();
             }
 
-            return menuElement.Id;
+            return image.Id;
         }
 
         public void Delete(int id)
         {
             using (var db = new SchoolContext())
             {
-                var menuElement = db.MenuElements.FirstOrDefault(m=>m.Id==id);
-                if (menuElement!=null)
+                var image = db.Images.FirstOrDefault(i => i.Id == id);
+                if (image!=null)
                 {
-                    db.MenuElements.Remove(menuElement);
-                    _unitOfWork.SaveChanges();
+                    db.Images.Remove(image);
                 }
             }
         }

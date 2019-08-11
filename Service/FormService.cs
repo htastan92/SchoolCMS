@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Data;
 using Entities;
 
@@ -16,7 +14,7 @@ namespace Service
             this._unitOfWork = unitOfWork;
         }
 
-        public Form GetAdmin(int id)
+        public Form Get(int id)
         {
             using (var db = new SchoolContext())
             {
@@ -24,7 +22,7 @@ namespace Service
             }
         }
 
-        public IList<Form> GetAllAdmin()
+        public IList<Form> GetAll()
         {
             using (var db = new SchoolContext())
             {
@@ -57,7 +55,7 @@ namespace Service
         {
             using (var db = new SchoolContext())
             {
-                var form = db.Forms.FirstOrDefault(f => f.Id == id);
+                var form = db.Forms.FirstOrDefault(i=>i.Id==id);
                 if (form!=null)
                 {
                     db.Forms.Remove(form);
