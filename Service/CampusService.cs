@@ -11,15 +11,15 @@ namespace Service
 
         public CampusService(UnitOfWork unitOfWork)
         {
-            this._unitOfWork = unitOfWork;
+            _unitOfWork = unitOfWork;
         }
+
         public Campus GetAdmin(int id)
         {
             using (var db = new SchoolContext())
             {
                 return db.Campuses.FirstOrDefault(c => c.Id == id && c.Status.Id != (int)Statuses.Removed);
             }
-
         }
 
         public Campus GetWeb(string slug)
@@ -45,7 +45,6 @@ namespace Service
             {
                 return db.Campuses.Where(c => c.Status.Id == (int)Statuses.Published).ToList();
             }
-
         }
 
         public int New(Campus campus)
@@ -54,7 +53,6 @@ namespace Service
             {
                 db.Campuses.Add(campus);
                 _unitOfWork.SaveChanges();
-
             }
 
             return campus.Id;
@@ -112,9 +110,5 @@ namespace Service
                 return false;
             }
         }
-
-
     }
-
-
 }

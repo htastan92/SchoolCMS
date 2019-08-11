@@ -54,15 +54,16 @@ namespace Service
             return image.Id;
         }
 
-        public void Delete(int id)
+        public bool Delete(int id)
         {
+            var image = Get(id);
+            if (image == null)
+                return false;
+
             using (var db = new SchoolContext())
             {
-                var image = db.Images.FirstOrDefault(i => i.Id == id);
-                if (image!=null)
-                {
-                    db.Images.Remove(image);
-                }
+                db.Images.Remove(image);
+                return true;
             }
         }
     }
