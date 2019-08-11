@@ -11,22 +11,62 @@ namespace Service
 
         public MenuService(UnitOfWork unitOfWork)
         {
-            this._unitOfWork = unitOfWork;
+            _unitOfWork = unitOfWork;
         }
 
-        public MenuElement Get(int id)
+        public MenuElement GetAdmin(int id)
         {
             using (var db = new SchoolContext())
             {
-                return db.MenuElements.FirstOrDefault(m => m.Id == id);
+                return db.MenuElements.FirstOrDefault(m => m.Id == id && m.Status.Id != (int)Statuses.Removed);
             }
         }
 
-        public IList<MenuElement> GetAll()
+        public MenuElement GetWeb(int id)
         {
             using (var db = new SchoolContext())
             {
-                return db.MenuElements.ToList();
+                return db.MenuElements.FirstOrDefault(m => m.Id == id && m.Status.Id == (int)Statuses.Published);
+            }
+        }
+
+        public IList<MenuElement> GetAllAdmin()
+        {
+            using (var db = new SchoolContext())
+            {
+                return db.MenuElements
+                    .Where(m => m.Status.Id != (int)Statuses.Removed)
+                    .ToList();
+            }
+        }
+
+        public IList<MenuElement> GetAllWeb()
+        {
+            using (var db = new SchoolContext())
+            {
+                return db.MenuElements
+                    .Where(m => m.Status.Id == (int)Statuses.Published)
+                    .ToList();
+            }
+        }
+
+        public IList<MenuElement> GetAllHeader()
+        {
+            using (var db = new SchoolContext())
+            {
+                return db.MenuElements
+                    .Where(m => m.MenuLocation == (int)MenuLocations.Header && m.Status.Id == (int)Statuses.Published)
+                    .ToList();
+            }
+        }
+
+        public IList<MenuElement> GetAllFooter()
+        {
+            using (var db = new SchoolContext())
+            {
+                return db.MenuElements
+                    .Where(m => m.MenuLocation == (int)MenuLocations.Footer && m.Status.Id == (int)Statuses.Published)
+                    .ToList();
             }
         }
 
@@ -52,16 +92,45 @@ namespace Service
             return menuElement.Id;
         }
 
-        public void Delete(int id)
+        public bool Publish(int id)
         {
-            using (var db = new SchoolContext())
+            try
             {
-                var menuElement = db.MenuElements.FirstOrDefault(m=>m.Id==id);
-                if (menuElement!=null)
-                {
-                    db.MenuElements.Remove(menuElement);
-                    _unitOfWork.SaveChanges();
-                }
+                GetAdmin(id).Status.Id = (int)Statuses.Published;
+                _unitOfWork.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool Draft(int id)
+        {
+            try
+            {
+                GetAdmin(id).Status.Id = (int)Statuses.Draft;
+                _unitOfWork.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool Remove(int id)
+        {
+            try
+            {
+                GetAdmin(id).Status.Id = (int)Statuses.Removed;
+                _unitOfWork.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
             }
         }
     }

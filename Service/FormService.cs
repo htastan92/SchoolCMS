@@ -11,7 +11,7 @@ namespace Service
 
         public FormService(UnitOfWork unitOfWork)
         {
-            this._unitOfWork = unitOfWork;
+            _unitOfWork = unitOfWork;
         }
 
         public Form Get(int id)
@@ -29,6 +29,7 @@ namespace Service
                 return db.Forms.ToList();
             }
         }
+
         public int New(Form form)
         {
             using (var db = new SchoolContext())
@@ -40,29 +41,17 @@ namespace Service
             return form.Id;
         }
 
-        public int Edit(Form form)
-        {
-            using (var db=new SchoolContext())
-            {
-                db.Forms.Update(form);
-                _unitOfWork.SaveChanges();
-            }
-
-            return form.Id;
-        }
-
         public void Delete(int id)
         {
             using (var db = new SchoolContext())
             {
-                var form = db.Forms.FirstOrDefault(i=>i.Id==id);
-                if (form!=null)
+                var form = db.Forms.FirstOrDefault(i => i.Id == id);
+                if (form != null)
                 {
                     db.Forms.Remove(form);
                     _unitOfWork.SaveChanges();
                 }
             }
         }
-
     }
 }

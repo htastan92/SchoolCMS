@@ -7,11 +7,11 @@ namespace Service
 {
     public class EventService
     {
-        public readonly UnitOfWork _unitOfWork;
+        private readonly UnitOfWork _unitOfWork;
 
         public EventService(UnitOfWork unitOfWork)
         {
-            this._unitOfWork = unitOfWork;
+            _unitOfWork = unitOfWork;
         }
 
         public Event GetAdmin(int id)
@@ -42,7 +42,7 @@ namespace Service
         {
             using (var db = new SchoolContext())
             {
-                return db.Events.Where(e => e.Status.Id != (int)Statuses.Published).ToList();
+                return db.Events.Where(e => e.Status.Id == (int)Statuses.Published).ToList();
             }
         }
 
@@ -87,7 +87,7 @@ namespace Service
         {
             try
             {
-                GetAdmin(id).Status.Id = (int) Statuses.Published;
+                GetAdmin(id).Status.Id = (int)Statuses.Published;
                 _unitOfWork.SaveChanges();
                 return true;
             }
@@ -101,11 +101,11 @@ namespace Service
         {
             try
             {
-                GetAdmin(id).Status.Id = (int) Statuses.Removed;
+                GetAdmin(id).Status.Id = (int)Statuses.Removed;
                 _unitOfWork.SaveChanges();
                 return true;
             }
-            catch 
+            catch
             {
                 return false;
             }

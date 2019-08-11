@@ -11,14 +11,14 @@ namespace Service
 
         public PageService(UnitOfWork unitOfWork)
         {
-            this._unitOfWork = unitOfWork;
+            _unitOfWork = unitOfWork;
         }
 
         public Page GetAdmin(int id)
         {
             using (var db = new SchoolContext())
             {
-                return db.Pages.FirstOrDefault(p => p.Id == id && p.Status.Id != (int) Statuses.Removed);
+                return db.Pages.FirstOrDefault(p => p.Id == id && p.Status.Id != (int)Statuses.Removed);
             }
         }
 
@@ -26,7 +26,7 @@ namespace Service
         {
             using (var db = new SchoolContext())
             {
-                return db.Pages.FirstOrDefault(p => p.Slug == slug && p.Status.Id == (int) Statuses.Published);
+                return db.Pages.FirstOrDefault(p => p.Slug == slug && p.Status.Id == (int)Statuses.Published);
             }
         }
 
@@ -34,14 +34,15 @@ namespace Service
         {
             using (var db = new SchoolContext())
             {
-                return db.Pages.Where(p => p.Status.Id != (int) Statuses.Removed).ToList();
+                return db.Pages.Where(p => p.Status.Id != (int)Statuses.Removed).ToList();
             }
         }
+
         public IList<Page> GetAllWeb()
         {
             using (var db = new SchoolContext())
             {
-                return db.Pages.Where(p => p.Status.Id == (int) Statuses.Published).ToList();
+                return db.Pages.Where(p => p.Status.Id == (int)Statuses.Published).ToList();
             }
         }
 
@@ -55,6 +56,7 @@ namespace Service
 
             return page.Id;
         }
+
         public int Edit(Page page)
         {
             using (var db = new SchoolContext())
@@ -66,41 +68,43 @@ namespace Service
             return page.Id;
         }
 
-        public bool Draft(int id)
-        {
-            try
-            {
-                GetAdmin(id).Status.Id = (int) Statuses.Draft;
-                _unitOfWork.SaveChanges();
-                return true;
-            }
-            catch 
-            {
-                return false;
-            }
-        }
         public bool Publish(int id)
         {
             try
             {
-                GetAdmin(id).Status.Id = (int) Statuses.Published;
+                GetAdmin(id).Status.Id = (int)Statuses.Published;
                 _unitOfWork.SaveChanges();
                 return true;
             }
-            catch 
+            catch
             {
                 return false;
             }
         }
+
+        public bool Draft(int id)
+        {
+            try
+            {
+                GetAdmin(id).Status.Id = (int)Statuses.Draft;
+                _unitOfWork.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public bool Delete(int id)
         {
             try
             {
-                GetAdmin(id).Status.Id = (int) Statuses.Removed;
+                GetAdmin(id).Status.Id = (int)Statuses.Removed;
                 _unitOfWork.SaveChanges();
                 return true;
             }
-            catch 
+            catch
             {
                 return false;
             }

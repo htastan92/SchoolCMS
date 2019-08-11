@@ -6,5 +6,7 @@
         public string Name { get; set; }
         public string Url { get; set; }
         public int MenuLocation { get; set; }
+
+        public Status Status { get; set; }
     }
 }

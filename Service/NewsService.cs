@@ -11,7 +11,7 @@ namespace Service
 
         public NewsService(UnitOfWork unitOfWork)
         {
-            this._unitOfWork = unitOfWork;
+            _unitOfWork = unitOfWork;
         }
 
         public News GetAdmin(int id)
@@ -37,6 +37,7 @@ namespace Service
                 return db.News.Where(n => n.Status.Id != (int) Statuses.Removed).ToList();
             }
         }
+
         public IList<News> GetAllWeb()
         {
             using (var db = new SchoolContext())
@@ -55,6 +56,7 @@ namespace Service
 
             return news.Id;
         }
+
         public int Edit(News news)
         {
             using (var db=new SchoolContext())
@@ -64,6 +66,20 @@ namespace Service
             }
 
             return news.Id;
+        }
+
+        public bool Publish(int id)
+        {
+            try
+            {
+                GetAdmin(id).Status.Id = (int) Statuses.Published;
+                _unitOfWork.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public bool Draft(int id)
@@ -79,19 +95,7 @@ namespace Service
                 return false;
             }
         }
-        public bool Publish(int id)
-        {
-            try
-            {
-                GetAdmin(id).Status.Id = (int) Statuses.Published;
-                _unitOfWork.SaveChanges();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
+
         public bool Remove(int id)
         {
             try

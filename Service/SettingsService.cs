@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using Data;
 using Entities;
 
@@ -11,7 +10,7 @@ namespace Service
 
         public SettingsService(UnitOfWork unitOfWork)
         {
-            this._unitOfWork = unitOfWork;
+            _unitOfWork = unitOfWork;
         }
 
         public Settings Get(int id)
@@ -22,24 +21,6 @@ namespace Service
             }
         }
 
-        public IList<Settings> GetAll()
-        {
-            using (var db = new SchoolContext())
-            {
-                return db.Settings.ToList();
-            }
-        }
-
-        public int New(Settings settings)
-        {
-            using (var db = new SchoolContext())
-            {
-                db.Settings.Add(settings);
-                _unitOfWork.SaveChanges();
-            }
-
-            return settings.Id;
-        }
         public int Edit(Settings settings)
         {
             using (var db = new SchoolContext())
@@ -49,19 +30,6 @@ namespace Service
             }
 
             return settings.Id;
-        }
-
-        public void Delete(int id)
-        {
-            using (var db = new SchoolContext())
-            {
-                var settings = db.Settings.FirstOrDefault(s => s.Id == id);
-                if (settings!=null)
-                {
-                    db.Settings.Remove(settings);
-                    _unitOfWork.SaveChanges();
-                }
-            }
         }
     }
 }

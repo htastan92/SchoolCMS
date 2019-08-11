@@ -11,22 +11,42 @@ namespace Service
 
         public StaffService(UnitOfWork unitOfWork)
         {
-            this._unitOfWork = unitOfWork;
+            _unitOfWork = unitOfWork;
         }
 
-        public Staff Get(int id)
+        public Staff GetAdmin(int id)
         {
             using (var db = new SchoolContext())
             {
-                return db.Staff.FirstOrDefault(s => s.Id == id);
+                return db.Staff.FirstOrDefault(s => s.Id == id && s.Status.Id != (int)Statuses.Removed);
             }
         }
 
-        public IList<Staff> GetAll()
+        public Staff GetWeb(int id)
         {
             using (var db = new SchoolContext())
             {
-                return db.Staff.ToList();
+                return db.Staff.FirstOrDefault(s => s.Id == id && s.Status.Id == (int)Statuses.Published);
+            }
+        }
+
+        public IList<Staff> GetAllAdmin()
+        {
+            using (var db = new SchoolContext())
+            {
+                return db.Staff
+                    .Where(s => s.Status.Id != (int)Statuses.Removed)
+                    .ToList();
+            }
+        }
+
+        public IList<Staff> GetAllWeb()
+        {
+            using (var db = new SchoolContext())
+            {
+                return db.Staff
+                    .Where(s => s.Status.Id == (int)Statuses.Published)
+                    .ToList();
             }
         }
 
@@ -40,6 +60,7 @@ namespace Service
 
             return staff.Id;
         }
+
         public int Edit(Staff staff)
         {
             using (var db = new SchoolContext())
@@ -51,16 +72,45 @@ namespace Service
             return staff.Id;
         }
 
-        public void Delete(int id)
+        public bool Publish(int id)
         {
-            using (var db = new SchoolContext())
+            try
             {
-                var staff = db.Staff.FirstOrDefault(s => s.Id == id);
-                if (staff!=null)
-                {
-                    db.Staff.Remove(staff);
-                    _unitOfWork.SaveChanges();
-                }
+                GetAdmin(id).Status.Id = (int)Statuses.Published;
+                _unitOfWork.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool Draft(int id)
+        {
+            try
+            {
+                GetAdmin(id).Status.Id = (int)Statuses.Draft;
+                _unitOfWork.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool Remove(int id)
+        {
+            try
+            {
+                GetAdmin(id).Status.Id = (int)Statuses.Removed;
+                _unitOfWork.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
             }
         }
     }

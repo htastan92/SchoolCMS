@@ -2,7 +2,6 @@
 using System.Linq;
 using Data;
 using Entities;
-
 namespace Service
 {
     public class MemberService
@@ -11,14 +10,14 @@ namespace Service
 
         public MemberService(UnitOfWork unitOfWork)
         {
-            this._unitOfWork = unitOfWork;
+            _unitOfWork = unitOfWork;
         }
 
         public Member Get(int id)
         {
             using (var db = new SchoolContext())
             {
-                return db.Members.FirstOrDefault(m => m.Id == id);
+                return db.Members.FirstOrDefault(m => m.Id == id && m.Status.Id == (int)Statuses.Published);
             }
         }
 
@@ -26,7 +25,9 @@ namespace Service
         {
             using (var db = new SchoolContext())
             {
-                return db.Members.ToList();
+                return db.Members
+                    .Where(m => m.Status.Id != (int)Statuses.Removed)
+                    .ToList();
             }
         }
 
@@ -43,7 +44,7 @@ namespace Service
 
         public int Edit(Member member)
         {
-            using (var db=new SchoolContext())
+            using (var db = new SchoolContext())
             {
                 db.Members.Update(member);
                 _unitOfWork.SaveChanges();
@@ -52,16 +53,53 @@ namespace Service
             return member.Id;
         }
 
-        public void Delete(int id)
+        public bool Publish(int id)
+        {
+            try
+            {
+                Get(id).Status.Id = (int)Statuses.Published;
+                _unitOfWork.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool Draft(int id)
+        {
+            try
+            {
+                Get(id).Status.Id = (int)Statuses.Draft;
+                _unitOfWork.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool Remove(int id)
+        {
+            try
+            {
+                Get(id).Status.Id = (int)Statuses.Removed;
+                _unitOfWork.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool CheckLogin(string username, string password)
         {
             using (var db = new SchoolContext())
             {
-                var member = db.Members.FirstOrDefault(m=>m.Id==id);
-                if (member!=null)
-                {
-                    db.Members.Remove(member);
-                    _unitOfWork.SaveChanges();
-                }
+                return db.Members.Any(m => m.Username == username && m.Password == password);
             }
         }
     }
