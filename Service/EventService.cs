@@ -140,5 +140,6 @@ namespace Service
         bool Draft(int? id);
         bool Publish(int? id);
         bool Remove(int? id);
+        IList<EventCategory> GetEventCategories(int eventId);
     }
 }

@@ -42,4 +42,13 @@ namespace Service
             return 1;
         }
     }
+
+    public interface IDashboardService
+    {
+        int CampusCount();
+        int EventCount();
+        int FormCount();
+        int MemberCount();
+
+    }
 }
