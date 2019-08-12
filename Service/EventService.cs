@@ -46,6 +46,23 @@ namespace Service
             }
         }
 
+        public IList<EventCategory> GetEventCategories(int eventId)
+        {
+            IList<EventCategory> eventCategories = new List<EventCategory>();
+            using (var db = new SchoolContext())
+            {
+                var categoriesOfEvent = db.EventCategoryEvent
+                    .Where(ece => ece.EventId == eventId)
+                    .Select(ece => ece.EventCategory).ToList();
+                foreach (var category in categoriesOfEvent)
+                {
+                    eventCategories.Add(category);
+                }
+            }
+
+            return eventCategories;
+        }
+
         public int New(Event addEvent)
         {
             using (var db = new SchoolContext())

@@ -18,7 +18,7 @@ namespace Service
         {
             using (var db = new SchoolContext())
             {
-                return db.News.FirstOrDefault(n => n.Id == id && n.Status.Id != (int) Statuses.Removed);
+                return db.News.FirstOrDefault(n => n.Id == id && n.Status.Id != (int)Statuses.Removed);
             }
         }
 
@@ -26,7 +26,7 @@ namespace Service
         {
             using (var db = new SchoolContext())
             {
-                return db.News.FirstOrDefault(n => n.Slug == slug && n.Status.Id == (int) Statuses.Published);
+                return db.News.FirstOrDefault(n => n.Slug == slug && n.Status.Id == (int)Statuses.Published);
             }
         }
 
@@ -34,7 +34,7 @@ namespace Service
         {
             using (var db = new SchoolContext())
             {
-                return db.News.Where(n => n.Status.Id != (int) Statuses.Removed).ToList();
+                return db.News.Where(n => n.Status.Id != (int)Statuses.Removed).ToList();
             }
         }
 
@@ -42,13 +42,30 @@ namespace Service
         {
             using (var db = new SchoolContext())
             {
-                return db.News.Where(n => n.Status.Id == (int) Statuses.Published).ToList();
+                return db.News.Where(n => n.Status.Id == (int)Statuses.Published).ToList();
             }
+        }
+
+        public IList<NewsCategory> GetNewsCategories(int newsId)
+        {
+            IList<NewsCategory> newsCategories = new List<NewsCategory>();
+            using (var db = new SchoolContext())
+            {
+                var categoriesOfNews = db.NewsCategoryNews
+                    .Where(ncn => ncn.NewsId == newsId)
+                    .Select(ncn => ncn.NewsCategory).ToList();
+                foreach (var category in categoriesOfNews)
+                {
+                    newsCategories.Add(category);
+                }
+            }
+
+            return newsCategories;
         }
 
         public int New(News news)
         {
-            using (var db=new SchoolContext())
+            using (var db = new SchoolContext())
             {
                 db.News.Add(news);
                 _unitOfWork.SaveChanges();
@@ -59,7 +76,7 @@ namespace Service
 
         public int Edit(News news)
         {
-            using (var db=new SchoolContext())
+            using (var db = new SchoolContext())
             {
                 db.News.Update(news);
                 _unitOfWork.SaveChanges();
@@ -72,7 +89,7 @@ namespace Service
         {
             try
             {
-                GetAdmin(id).Status.Id = (int) Statuses.Published;
+                GetAdmin(id).Status.Id = (int)Statuses.Published;
                 _unitOfWork.SaveChanges();
                 return true;
             }
@@ -86,7 +103,7 @@ namespace Service
         {
             try
             {
-                GetAdmin(id).Status.Id = (int) Statuses.Draft;
+                GetAdmin(id).Status.Id = (int)Statuses.Draft;
                 _unitOfWork.SaveChanges();
                 return true;
             }
@@ -100,7 +117,7 @@ namespace Service
         {
             try
             {
-                GetAdmin(id).Status.Id = (int) Statuses.Removed;
+                GetAdmin(id).Status.Id = (int)Statuses.Removed;
                 _unitOfWork.SaveChanges();
                 return true;
             }
