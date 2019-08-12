@@ -1,13 +1,25 @@
 ﻿using Admin.Models;
+using Entities;
 using Microsoft.AspNetCore.Mvc;
+using Service;
 
 namespace Admin.Controllers
 {
     public class StaffController : Controller
     {
+        private readonly StaffService _staffService;
+
+        public StaffController(StaffService staffService)
+        {
+            _staffService = staffService;
+        }
         public IActionResult Index()
         {
-            return View();
+            StaffListViewModel viewModel = new StaffListViewModel()
+            {
+                Staff = _staffService.GetAllAdmin()
+            };
+            return View(viewModel);
         }
 
         public IActionResult New()
@@ -20,6 +32,15 @@ namespace Admin.Controllers
             if (!ModelState.IsValid)
                 return View(viewModel);
 
+            Staff newStaff = new Staff()
+            {
+                FullName = viewModel.FullName,
+                BioText = viewModel.BioText,
+                Sector = viewModel.Sector,
+                Campus = null,
+                Status = null
+            };
+            _staffService.New(newStaff);
             return RedirectToAction("Index");
         }
 
@@ -27,15 +48,33 @@ namespace Admin.Controllers
         {
             if (id == null)
                 return RedirectToAction("Index");
+            var findStaff = _staffService.GetAdmin(id);
 
-            return View();
+            StaffEditViewModel viewModel= new StaffEditViewModel()
+            {
+                Id = findStaff.Id,
+                FullName = findStaff.FullName,
+                BioText = findStaff.BioText,
+                Sector = findStaff.Sector,
+                Status = findStaff.Status,
+                Campus = findStaff.Campus
+            };
+            return View(viewModel);
         }
         [HttpPost]
         public IActionResult Edit(StaffEditViewModel viewModel)
         {
             if (!ModelState.IsValid)
                 return View(viewModel);
-
+            Staff editedStaff = new Staff()
+            {
+                Id = viewModel.Id,
+                FullName = viewModel.FullName,
+                Sector = viewModel.Sector,
+                BioText = viewModel.BioText,
+                Status = viewModel.Status,
+                Campus = viewModel.Campus
+            };
             return RedirectToAction("Index");
         }
 
@@ -43,7 +82,7 @@ namespace Admin.Controllers
         {
             if (id == null)
                 return RedirectToAction("Index");
-            // Publish
+            _staffService.Publish(id);
             return RedirectToAction("Index");
         }
 
@@ -51,7 +90,7 @@ namespace Admin.Controllers
         {
             if (id == null)
                 return RedirectToAction("Index");
-            // Draft
+            _staffService.Draft(id);
             return RedirectToAction("Index");
         }
 
@@ -59,7 +98,7 @@ namespace Admin.Controllers
         {
             if (id == null)
                 return RedirectToAction("Index");
-            // Remove
+            _staffService.Remove(id);
             return RedirectToAction("Index");
         }
     }

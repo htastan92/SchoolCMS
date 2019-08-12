@@ -14,7 +14,7 @@ namespace Service
             _unitOfWork = unitOfWork;
         }
 
-        public Staff GetAdmin(int id)
+        public Staff GetAdmin(int? id)
         {
             using (var db = new SchoolContext())
             {
@@ -22,7 +22,7 @@ namespace Service
             }
         }
 
-        public Staff GetWeb(int id)
+        public Staff GetWeb(int? id)
         {
             using (var db = new SchoolContext())
             {
@@ -72,7 +72,7 @@ namespace Service
             return staff.Id;
         }
 
-        public bool Publish(int id)
+        public bool Publish(int? id)
         {
             try
             {
@@ -86,7 +86,7 @@ namespace Service
             }
         }
 
-        public bool Draft(int id)
+        public bool Draft(int? id)
         {
             try
             {
@@ -100,7 +100,7 @@ namespace Service
             }
         }
 
-        public bool Remove(int id)
+        public bool Remove(int? id)
         {
             try
             {
