@@ -11,13 +11,16 @@ namespace Product.Controllers
         private readonly IPageService _pageService;
         private readonly IEventService _eventService;
         private readonly INewsService _newsService;
+        private readonly IMenuService _menuService;
 
-        public HomeController(INewsService newsService, IEventService eventService, IPageService pageService, ICampusService campusService)
+        public HomeController(INewsService newsService, IEventService eventService,
+            IPageService pageService, ICampusService campusService, IMenuService menuService)
         {
             _newsService = newsService;
             _eventService = eventService;
             _pageService = pageService;
             _campusService = campusService;
+            _menuService = menuService;
         }
 
         [Route("")]
@@ -159,6 +162,16 @@ namespace Product.Controllers
             };
 
             return View(viewModel);
+        }
+
+        public IActionResult HeaderPartialResult()
+        {
+            HeaderPartialViewModel viewModel = new HeaderPartialViewModel
+            {
+                HeaderMenuElements = _menuService.GetAllHeader()
+            };
+
+            return PartialView("HeaderPartial", viewModel);
         }
     }
 }
