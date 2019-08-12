@@ -1,6 +1,6 @@
 namespace Service
 {
-    public class DashboardService
+    public class DashboardService:IDashboardService
     {
         public int CampusCount()
         {
@@ -49,6 +49,9 @@ namespace Service
         int EventCount();
         int FormCount();
         int MemberCount();
-
+        int MenuElementCount();
+        int NewsCount();
+        int PageCount();
+        int StaffCount();
     }
 }

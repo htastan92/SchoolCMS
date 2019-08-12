@@ -2,12 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using Entities;
 
 namespace Service
 {
-    public class EventCategoryService
+    public class EventCategoryService:IEventCategoryService
     {
             private readonly UnitOfWork _unitOfWork;
 
@@ -96,5 +97,16 @@ namespace Service
                 return false;
             }
         }
+    }
+
+    public interface IEventCategoryService
+    {
+        EventCategory Get(int? id);
+        IList<EventCategory> GetAll();
+        int New(EventCategory addEventCategory);
+        int Edit(EventCategory editEventCategory);
+        bool Draft(int? id);
+        bool Publish(int? id);
+        bool Remove(int? id);
     }
 }

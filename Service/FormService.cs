@@ -54,4 +54,13 @@ namespace Service
             }
         }
     }
+
+    public interface IFormService
+    {
+        Form Get(int? id);
+        IList<Form> GetAll();
+        int New(Form form);
+        void Delete(int id);
+
+    }
 }

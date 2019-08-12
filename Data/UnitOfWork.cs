@@ -1,6 +1,6 @@
 ﻿namespace Data
 {
-    public class UnitOfWork
+    public class UnitOfWork:IUnitOfWork
     {
         private readonly SchoolContext _schoolContext;
 
@@ -13,5 +13,10 @@
         {
             _schoolContext.SaveChanges();
         }
+    }
+
+    public interface IUnitOfWork
+    {
+        void SaveChanges();
     }
 }
