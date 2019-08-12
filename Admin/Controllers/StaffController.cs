@@ -57,8 +57,8 @@ namespace Admin.Controllers
                 FullName = findStaff.FullName,
                 BioText = findStaff.BioText,
                 Sector = findStaff.Sector,
-                Status = findStaff.Status,
-                Campus = findStaff.Campus
+                StatusId = findStaff.StatusId,
+                CampusId = findStaff.CampusId
             };
             return View(viewModel);
         }
@@ -74,8 +74,8 @@ namespace Admin.Controllers
                 FullName = viewModel.FullName,
                 Sector = viewModel.Sector,
                 BioText = viewModel.BioText,
-                Status = viewModel.Status,
-                Campus = viewModel.Campus
+                StatusId = viewModel.StatusId,
+                CampusId = viewModel.CampusId
             };
             _staffService.Edit(editedStaff);
             return RedirectToAction("Index");

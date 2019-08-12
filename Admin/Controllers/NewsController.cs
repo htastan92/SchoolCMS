@@ -62,8 +62,8 @@ namespace Admin.Controllers
                  Description = findNews.Description,
                  EditorContent = findNews.EditorContent,
                  Slug = findNews.Slug,
-                 Image = null,
-                 Status = null
+                 ImageId = 1,
+                 StatusId = 1
             };
             return View(viewModel);
         }

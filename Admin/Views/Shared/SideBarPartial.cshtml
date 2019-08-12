@@ -8,10 +8,10 @@
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-fw fa-folder"></i>
-            <span>Kampüs</span>
+            <span>Kampüs Yönetimi</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-            
+
             <a class="dropdown-item" href="@Url.Action("New","Campus")">Kampüs Ekle</a>
             <a class="dropdown-item" href="@Url.Action("Index","Campus")">Kampüsleri Listele</a>
         </div>
@@ -19,7 +19,7 @@
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-fw fa-folder"></i>
-            <span>Etknlik</span>
+            <span>Etknlik Yönetimi</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
             <a class="dropdown-item" href="@Url.Action("New","Event")">Etkinlik Ekle</a>
@@ -34,10 +34,54 @@
             <span>Form Yönetimi</span>
         </a>
     </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Menü Yönetimi</span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+
+            <a class="dropdown-item" href="@Url.Action("New","Menu")">Öğe Ekle</a>
+            <a class="dropdown-item" href="@Url.Action("Index","Menu")">Öğeleri Listele</a>
+        </div>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Haber Yönetimi</span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+
+            <a class="dropdown-item" href="@Url.Action("New","News")">Haber Ekle</a>
+            <a class="dropdown-item" href="@Url.Action("Index","News")">Haberleri Listele</a>
+        </div>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Sayfa Yönetimi</span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+
+            <a class="dropdown-item" href="@Url.Action("New","News")">Sayfa Ekle</a>
+            <a class="dropdown-item" href="@Url.Action("Index","News")">Sayfaları Listele</a>
+        </div>
+    </li>
     <li class="nav-item">
         <a class="nav-link" href="tables.html">
             <i class="fas fa-fw fa-table"></i>
-            <span>Tables</span>
+            <span>Ayarlar</span>
         </a>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Eğitim Kadrosu</span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+
+            <a class="dropdown-item" href="@Url.Action("New","News")">Eğitmen Ekle</a>
+            <a class="dropdown-item" href="@Url.Action("Index","News")">Eğitmenleri Listele</a>
+        </div>
     </li>
 </ul>
