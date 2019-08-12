@@ -6,8 +6,8 @@ using Entities;
 
 namespace Admin.Models
 {
-    public class FormListViewModel
+    public class EventCategoryListViewModel
     {
-        public IList<Form>Forms { get; set; }
+        public IList<EventCategory> EventCategories { get; set; }
     }
 }

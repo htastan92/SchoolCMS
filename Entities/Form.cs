@@ -12,6 +12,7 @@ namespace Entities
 
         public string StudentFullName { get; set; }
 
+        public int CampusId { get; set; }
         public Campus Campus { get; set; }
 
         public string IpAddress { get; set; }

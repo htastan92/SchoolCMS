@@ -13,23 +13,23 @@ namespace Service
             _unitOfWork = unitOfWork;
         }
 
-        public Settings Get(int id)
+        public Settings Get()
         {
             using (var db = new SchoolContext())
             {
-                return db.Settings.FirstOrDefault(s => s.Id == id);
+                return db.Settings.FirstOrDefault();
             }
         }
 
-        public int Edit(Settings settings)
+        public int Edit(Settings editedSettings)
         {
             using (var db = new SchoolContext())
             {
-                db.Settings.Update(settings);
+                db.Settings.Update(editedSettings);
                 _unitOfWork.SaveChanges();
             }
 
-            return settings.Id;
+            return editedSettings.Id;
         }
     }
 }

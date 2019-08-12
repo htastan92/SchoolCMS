@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Admin.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Admin.Controllers
 {
@@ -6,7 +7,29 @@ namespace Admin.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            FormListViewModel viewModel = new FormListViewModel
+            {
+                Forms = _formService.GetAll()
+            };
+
+            return View(viewModel);
+        }
+
+        public IActionResult Detail(int? id)
+        {
+            if (id == null)
+                return RedirectToAction("Index");
+
+            var findForm = _formService.Find(id);
+            if (findForm == null)
+                return RedirectToAction("Index");
+
+            FormDetailViewModel viewModel = new FormDetailViewModel
+            {
+
+            };
+
+            return view(viewModel);
         }
     }
 }

@@ -25,7 +25,6 @@ namespace Admin.Controllers
 
         public IActionResult New()
         {
-            
             return View();
         }
         [HttpPost]
@@ -40,8 +39,8 @@ namespace Admin.Controllers
                 Description = viewModel.Description,
                 Slug = viewModel.Slug,
                 EditorContent = viewModel.EditorContent,
-                Image = null,
-                Status = null,
+                ImageId = 1,
+                StatusId = viewModel.StatusId,
                 Address = viewModel.Address,
                 Telephone = viewModel.Telephone,
                 EmailAddress = viewModel.EmailAddress,
@@ -68,14 +67,15 @@ namespace Admin.Controllers
                 Description = findCampus.Description,
                 Slug = findCampus.Slug,
                 EditorContent = findCampus.EditorContent,
-                ImageUrl = null,
+                ImageUrl = findCampus.Image.Url,
+                StatusId = findCampus.Status.Id,
                 Address = findCampus.Address,
                 Telephone = findCampus.Telephone,
                 EmailAddress = findCampus.EmailAddress,
                 Fax = findCampus.Fax
             };
-            return View(viewModel);
 
+            return View(viewModel);
         }
         [HttpPost]
         public IActionResult Edit(CampusEditViewModel viewModel)
@@ -89,13 +89,14 @@ namespace Admin.Controllers
                 Name = viewModel.Name,
                 Description = viewModel.Description,
                 EditorContent = viewModel.EditorContent,
-                Image = null,
-                Status = null,
+                ImageId = 1,
+                StatusId = viewModel.StatusId,
                 Address = viewModel.Address,
                 Telephone = viewModel.Telephone,
                 EmailAddress = viewModel.EmailAddress,
                 Fax = viewModel.Fax
             };
+
             _campusService.Edit(editedcampus);
             return RedirectToAction("Index");
         }
@@ -104,6 +105,7 @@ namespace Admin.Controllers
         {
             if (id == null)
                 return RedirectToAction("Index");
+
             _campusService.Publish(id);
             return RedirectToAction("Index");
         }
@@ -112,6 +114,7 @@ namespace Admin.Controllers
         {
             if (id == null)
                 return RedirectToAction("Index");
+
             _campusService.Draft(id);
             return RedirectToAction("Index");
         }
@@ -120,6 +123,7 @@ namespace Admin.Controllers
         {
             if (id == null)
                 return RedirectToAction("Index");
+
             _campusService.Remove(id);
             return RedirectToAction("Index");
         }

@@ -4,10 +4,10 @@ namespace Product.Controllers
 {
     public class HomeController : Controller
     {
-        //private readonly CampusService _campusService = new CampusService();
-        //private readonly PageService _pageService = new PageService();
-        //private readonly EventService _eventService = new EventService();
-        //private readonly NewsService _newsService = new NewsService();
+        private readonly CampusService _campusService = new CampusService();
+        private readonly PageService _pageService = new PageService();
+        private readonly EventService _eventService = new EventService();
+        private readonly NewsService _newsService = new NewsService();
 
         [Route("")]
         public IActionResult Index()

@@ -18,6 +18,7 @@ namespace Entities
         public string InstagramUrl { get; set; }
         public string YouTubeUrl { get; set; }
 
+        public int EditorMemberId { get; set; }
         public Member EditorMember { get; set; }
 
         public DateTime EditDate { get; set; }

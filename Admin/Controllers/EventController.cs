@@ -38,12 +38,12 @@ namespace Admin.Controllers
                 Description = viewModel.Description,
                 Slug = viewModel.Slug,
                 EditorContent = viewModel.EditorContent,
-                Image = null,
-                Status = null,
+                ImageId = 1,
+                StatusId = viewModel.StatusId,
                 Location = viewModel.Location,
                 StartDate = viewModel.StartDate,
                 EndDate = viewModel.EndDate,
-                Campus = null
+                CampusId = viewModel.CampusId
             };
             _eventService.New(newEvent);
             return RedirectToAction("Index");
@@ -65,10 +65,12 @@ namespace Admin.Controllers
                 Description = findEvent.Description,
                 EditorContent = findEvent.EditorContent,
                 Slug = findEvent.Slug,
+                StatusId = findEvent.StatusId,
                 ImageUrl = null,
                 Location = findEvent.Slug,
                 StartDate = findEvent.StartDate,
                 EndDate = findEvent.EndDate,
+                CampusId = findEvent.CampusId
                 
             };
             return View(viewModel);
@@ -86,10 +88,14 @@ namespace Admin.Controllers
                 Description = viewModel.Description,
                 EditorContent = viewModel.EditorContent,
                 Slug = viewModel.Slug,
+                ImageId = 1,
+                StatusId = viewModel.StatusId,
                 Image = null,
                 Location = viewModel.Location,
                 StartDate = viewModel.StartDate,
-                EndDate = viewModel.EndDate
+                EndDate = viewModel.EndDate,
+                CampusId = viewModel.CampusId
+                
             };
             _eventService.Edit(editedEvent);
             return RedirectToAction("Index");

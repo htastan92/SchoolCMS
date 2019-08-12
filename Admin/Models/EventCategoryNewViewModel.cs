@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Entities;
 
 namespace Admin.Models
 {
-    public class FormListViewModel
+    public class EventCategoryNewViewModel
     {
-        public IList<Form>Forms { get; set; }
+        public string Name { get; set; }
+
+        public int StatusId { get; set; }
     }
 }

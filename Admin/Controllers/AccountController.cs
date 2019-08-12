@@ -10,10 +10,13 @@ namespace Admin.Controllers
             return View();
         }
 
+        [HttpPost]
         public IActionResult Index(AccountViewModel viewModel)
         {
             if (!ModelState.IsValid)
                 return View(viewModel);
+
+            // Change password, mail etc.
 
             return RedirectToAction("Index");
         }
