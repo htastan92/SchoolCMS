@@ -5,7 +5,7 @@ using Entities;
 
 namespace Service
 {
-    public class NewsService:INewsService
+    public class NewsService : INewsService
     {
         private readonly IUnitOfWork _unitOfWork;
 
@@ -43,6 +43,17 @@ namespace Service
             using (var db = new SchoolContext())
             {
                 return db.News.Where(n => n.Status.Id == (int)Statuses.Published).ToList();
+            }
+        }
+
+        public IList<News> LastNewsHomepage()
+        {
+            using (var db = new SchoolContext())
+            {
+                return db.News.Where(n => n.Status.Id == (int) Statuses.Published)
+                    .OrderByDescending(n => n.Id)
+                    .Take(3)
+                    .ToList();
             }
         }
 
@@ -134,6 +145,7 @@ namespace Service
         News GetWeb(string slug);
         IList<News> GetAllAdmin();
         IList<News> GetAllWeb();
+        IList<News> LastNewsHomepage();
         int New(News news);
         int Edit(News news);
         bool Publish(int? id);

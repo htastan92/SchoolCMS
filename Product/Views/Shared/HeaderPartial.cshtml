@@ -1,4 +1,5 @@
-﻿@model HeaderPartialViewModel
+﻿@*@model HeaderPartialViewModel*@
+
 <!-- Header Area Start -->
 <header class="top">
     <div class="header-area header-sticky fixed">
@@ -7,7 +8,7 @@
                 <div class="col-md-3 col-sm-3 col-xs-6">
                     <div class="logo">
                         <a href="@Url.Action("Index", "Home")">
-                            <img src="@Url.Content("~/img/logo/logo.png")" alt="Erdem Okulları Logo"/>
+                            <img src="@Url.Content("~/img/logo/logo.png")" alt="Erdem Okulları Logo" />
                         </a>
                     </div>
                 </div>
@@ -17,40 +18,20 @@
                         <div class="main-menu one text-right">
                             <nav>
                                 <ul>
-                                    <li>
-                                        <a href="index.html">Home</a>
-                                    </li>
-                                    <li><a href="about.html">About</a></li>
-                                    <li>
-                                        <a href="course.html">courses</a>
-                                        <ul>
-                                            <li><a href="course.html">courses</a></li>
-                                            <li><a href="course-details.html">courses details</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="event.html">event</a>
-                                        <ul>
-                                            <li><a href="event.html">event</a></li>
-                                            <li><a href="event-details.html">event details</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="hidden-sm">
-                                        <a href="teacher.html">teacher</a>
-                                        <ul>
-                                            <li><a href="teacher.html">teacher</a></li>
-                                            <li><a href="teacher-details.html">teacher details</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="blog.html">blog</a>
-                                        <ul>
-                                            <li><a href="blog.html">blog</a></li>
-                                            <li><a href="blog-details.html">blog details</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="contact.html">Contact</a></li>
-                                    <li><a href="#">Buy Now</a>
+                                    <li><a href="/test">Test</a></li>
+                                    @*@foreach (var headerMenuElement in Model.HeaderMenuElements)
+                                    {
+                                        <li>
+                                            <a href="@headerMenuElement.Url">@headerMenuElement.Name</a>
+                                        </li>
+                                    }*@
+                                    @*<li>
+                                            <a href="course.html">courses</a>
+                                            <ul>
+                                                <li><a href="course.html">courses</a></li>
+                                                <li><a href="course-details.html">courses details</a></li>
+                                            </ul>
+                                        </li>*@
                                 </ul>
                             </nav>
                         </div>

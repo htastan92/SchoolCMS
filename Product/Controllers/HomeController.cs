@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Entities;
 using Microsoft.AspNetCore.Mvc;
 using Product.Models;
 using Service;
@@ -12,21 +14,34 @@ namespace Product.Controllers
         private readonly IEventService _eventService;
         private readonly INewsService _newsService;
         private readonly IMenuService _menuService;
+        private readonly ICarouselService _carouselService;
+        private readonly IReviewService _reviewService;
 
         public HomeController(INewsService newsService, IEventService eventService,
-            IPageService pageService, ICampusService campusService, IMenuService menuService)
+            IPageService pageService, ICampusService campusService, IMenuService menuService,
+            ICarouselService carouselService, IReviewService reviewService)
         {
             _newsService = newsService;
             _eventService = eventService;
             _pageService = pageService;
             _campusService = campusService;
             _menuService = menuService;
+            _carouselService = carouselService;
+            _reviewService = reviewService;
         }
 
         [Route("")]
         public IActionResult Index()
         {
-            return View();
+            HomepageViewModel viewModel = new HomepageViewModel
+            {
+                Carousels = _carouselService.GetAllWeb(),
+                UpcomingEvents = _eventService.UpcomingEvents(),
+                Reviews = _reviewService.GetAllWeb(),
+                LastNews = _newsService.LastNewsHomepage()
+            };
+
+            return View(viewModel);
         }
 
         [Route("404")]
@@ -164,11 +179,16 @@ namespace Product.Controllers
             return View(viewModel);
         }
 
-        public IActionResult HeaderPartialResult()
+        public PartialViewResult HeaderPartial()
         {
             HeaderPartialViewModel viewModel = new HeaderPartialViewModel
             {
-                HeaderMenuElements = _menuService.GetAllHeader()
+                HeaderMenuElements = new List<MenuElement>
+                {
+                    new MenuElement{Id = 1, Name = "Üst Menü 01", Url = "/ustmenu01"},
+                    new MenuElement{Id = 2, Name = "Üst Menü 02", Url = "/ustmenu02" },
+                    new MenuElement{Id = 3, Name = "Üst Menü 03", Url = "/ustmenu03" }
+                }
             };
 
             return PartialView("HeaderPartial", viewModel);
