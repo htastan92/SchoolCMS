@@ -4,11 +4,11 @@ using Data;
 using Entities;
 namespace Service
 {
-    public class MemberService
+    public class MemberService:IMemberService
     {
-        private readonly UnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public MemberService(UnitOfWork unitOfWork)
+        public MemberService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
@@ -102,5 +102,17 @@ namespace Service
                 return db.Members.Any(m => m.Username == username && m.Password == password);
             }
         }
+    }
+
+    public interface IMemberService
+    {
+        Member Get(int id);
+        IList<Member> GetAll();
+        int New(Member member);
+        int Edit(Member member);
+        bool Publish(int id);
+        bool Draft(int id);
+        bool Remove(int id);
+        bool CheckLogin(string username, string password);
     }
 }

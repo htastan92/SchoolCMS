@@ -4,7 +4,7 @@ using Entities;
 
 namespace Service
 {
-    public class ImageService 
+    public class ImageService :IImageService
     {
         private readonly IUnitOfWork _unitOfWork;
 

@@ -7,9 +7,9 @@ namespace Service
 {
     public class FormService:IFormService
     {
-        private readonly UnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public FormService(UnitOfWork unitOfWork)
+        public FormService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }

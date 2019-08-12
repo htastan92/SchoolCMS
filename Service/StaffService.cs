@@ -7,9 +7,9 @@ namespace Service
 {
     public class StaffService:IStaffService
     {
-        private readonly UnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public StaffService(UnitOfWork unitOfWork)
+        public StaffService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }

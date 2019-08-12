@@ -5,11 +5,11 @@ using Entities;
 
 namespace Service
 {
-    public class MenuService
+    public class MenuService :IMenuService
     {
-        private readonly UnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public MenuService(UnitOfWork unitOfWork)
+        public MenuService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
@@ -133,5 +133,20 @@ namespace Service
                 return false;
             }
         }
+    }
+
+    public interface IMenuService
+    {
+        MenuElement GetAdmin(int id);
+        MenuElement GetWeb(int id);
+        IList<MenuElement> GetAllAdmin();
+        IList<MenuElement> GetAllWeb();
+        IList<MenuElement> GetAllHeader();
+        IList<MenuElement> GetAllFooter();
+        int New(MenuElement menuElement);
+        int Edit(MenuElement menuElement);
+        bool Publish(int id);
+        bool Draft(int id);
+        bool Remove(int id);
     }
 }
