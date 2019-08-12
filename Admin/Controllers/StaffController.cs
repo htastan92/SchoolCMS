@@ -77,6 +77,7 @@ namespace Admin.Controllers
                 Status = viewModel.Status,
                 Campus = viewModel.Campus
             };
+            _staffService.Edit(editedStaff);
             return RedirectToAction("Index");
         }
 

@@ -15,5 +15,5 @@ namespace Admin.Models
         public int StatusId { get; set; }
         public int ImageId { get; set; }
     }
-    }
 }
+

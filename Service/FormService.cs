@@ -14,7 +14,7 @@ namespace Service
             _unitOfWork = unitOfWork;
         }
 
-        public Form Get(int id)
+        public Form Get(int? id)
         {
             using (var db = new SchoolContext())
             {
