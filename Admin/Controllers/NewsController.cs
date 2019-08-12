@@ -7,9 +7,9 @@ namespace Admin.Controllers
 {
     public class NewsController : Controller
     {
-        private readonly NewsService _newsService;
+        private readonly INewsService _newsService;
 
-        public NewsController(NewsService newsService)
+        public NewsController(INewsService newsService)
         {
             _newsService = newsService;
         }
