@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Data
+﻿namespace Data
 {
     public class UnitOfWork
     {
@@ -10,7 +6,7 @@ namespace Data
 
         public UnitOfWork(SchoolContext schoolContext)
         {
-            this._schoolContext = schoolContext;
+            _schoolContext = schoolContext;
         }
 
         public void SaveChanges()

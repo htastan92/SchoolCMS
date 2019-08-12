@@ -1,6 +1,4 @@
 ﻿namespace Entities
 {
-    public class Page : Content
-    {
-    }
+    public class Page : Content { }
 }
