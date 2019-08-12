@@ -1,1 +1,55 @@
-﻿
+﻿@model HomepageViewModel
+
+@{
+    ViewData["Title"] = "Ana Sayfa";
+}
+
+<!doctype html>
+<html class="no-js" lang="tr">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Erdem Okulları - Eğitim Tam Adresi</title>
+    <meta name="description" content="Özel Erdem Okulları, eğitim tam adresi">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+    <link rel="stylesheet" href="@Url.Content("~/css/bootstrap.min.css")">
+    <link rel="stylesheet" href="@Url.Content("~/css/animate.css")">
+    <link rel="stylesheet" href="@Url.Content("~/css/meanmenu.css")">
+    <link rel="stylesheet" href="@Url.Content("~/css/magnific-popup.css")">
+    <link rel="stylesheet" href="@Url.Content("~/css/owl.carousel.min.css")">
+    <link rel="stylesheet" href="@Url.Content("~/css/font-awesome.min.css")">
+    <link rel="stylesheet" href="@Url.Content("~/css/et-line-icon.css")">
+    <link rel="stylesheet" href="@Url.Content("~/css/reset.css")">
+    <link rel="stylesheet" href="@Url.Content("~/css/ionicons.min.css")">
+    <link rel="stylesheet" href="@Url.Content("~/css/material-design-iconic-font.min.css")">
+    <link rel="stylesheet" href="@Url.Content("~/css/style.css")">
+    <link rel="stylesheet" href="@Url.Content("~/css/responsive.css")">
+    <script src="@Url.Content("~/js/vendor/modernizr-2.8.3.min.js")"></script>
+</head>
+<body>
+    <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <partial name="HeaderPartial" />
+
+    @RenderBody()
+
+    <partial name="FooterPartial" />
+
+    <script src="@Url.Content("~/js/vendor/jquery-1.12.0.min.js")"></script>
+    <script src="@Url.Content("~/js/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/js/jquery.meanmenu.js")"></script>
+    <script src="@Url.Content("~/js/jquery.magnific-popup.js")"></script>
+    <script src="@Url.Content("~/js/owl.carousel.min.js")"></script>
+    <script src="@Url.Content("~/js/jquery.mb.YTPlayer.js")"></script>
+    <script src="@Url.Content("~/js/jquery.nicescroll.min.js")"></script>
+    <script src="@Url.Content("~/js/plugins.js")"></script>
+    <script src="@Url.Content("~/js/main.js")"></script>
+
+    @RenderSection("JavascriptSection", false)
+</body>
+</html>
