@@ -7,12 +7,12 @@ namespace Product.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly CampusService _campusService;
-        private readonly PageService _pageService;
-        private readonly EventService _eventService;
-        private readonly NewsService _newsService;
+        private readonly ICampusService _campusService;
+        private readonly IPageService _pageService;
+        private readonly IEventService _eventService;
+        private readonly INewsService _newsService;
 
-        public HomeController(NewsService newsService, EventService eventService, PageService pageService, CampusService campusService)
+        public HomeController(INewsService newsService, IEventService eventService, IPageService pageService, ICampusService campusService)
         {
             _newsService = newsService;
             _eventService = eventService;
