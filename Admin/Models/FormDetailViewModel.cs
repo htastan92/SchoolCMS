@@ -2,9 +2,12 @@
 {
     public class FormDetailViewModel
     {
-        public string FullName { get; set; }
-        public string Title { get; set; }
-        public string Description { get; set; }
+        public string ParentFullName { get; set; }
+        public string TelephoneNumber { get; set; }
+        public string EmailAddress { get; set; }
+
+        public string StudentFullName { get; set; }
+
         public int CampusId { get; set; }
         
     }

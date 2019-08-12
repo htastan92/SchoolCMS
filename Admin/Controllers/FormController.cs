@@ -34,7 +34,11 @@ namespace Admin.Controllers
 
             FormDetailViewModel viewModel = new FormDetailViewModel
             {
-
+                ParentFullName = findForm.ParentFullName,
+                StudentFullName = findForm.StudentFullName,
+                CampusId = findForm.CampusId,
+                EmailAddress = findForm.EmailAddress,
+                TelephoneNumber = findForm.TelephoneNumber
             };
 
             return View(viewModel);
