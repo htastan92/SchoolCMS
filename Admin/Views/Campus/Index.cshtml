@@ -1,8 +1,24 @@
 ﻿@model CampusListViewModel
+    <p>
+        @Html.ActionLink("Yeni Kampüs", "New", "Campus", null,new { @class = "btn btn-primary" })
+    </p>
 
-@{
-    ViewData["Title"] = "Index";
-}
-
-<h2>Index</h2>
-
+<table class="table table-bordered" id="dataTable">
+    <thead>
+    <tr>
+        <th>Kampüs Id</th>
+        <th>Kampüs Adı</th>
+        <th>Durumu</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var campus in Model.Campuses)
+    {
+        <tr>
+            <td>@campus.Id</td>
+            <td>@campus.Name</td>
+            <td>@campus.Status.Name</td>
+        </tr>
+    }
+    </tbody>
+</table>
