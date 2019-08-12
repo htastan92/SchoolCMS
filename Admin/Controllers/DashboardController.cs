@@ -6,9 +6,9 @@ namespace Admin.Controllers
 {
     public class DashboardController : Controller
     {
-        private readonly DashboardService _dashboardService;
+        private readonly IDashboardService _dashboardService;
 
-        public DashboardController(DashboardService dashboardService)
+        public DashboardController(IDashboardService dashboardService)
         {
             _dashboardService = dashboardService;
         }

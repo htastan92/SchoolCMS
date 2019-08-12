@@ -7,9 +7,9 @@ namespace Admin.Controllers
 {
     public class StaffController : Controller
     {
-        private readonly StaffService _staffService;
+        private readonly IStaffService _staffService;
 
-        public StaffController(StaffService staffService)
+        public StaffController(IStaffService staffService)
         {
             _staffService = staffService;
         }

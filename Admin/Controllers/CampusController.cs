@@ -7,9 +7,9 @@ namespace Admin.Controllers
 {
     public class CampusController : Controller
     {
-        private readonly CampusService _campusService;
+        private readonly ICampusService _campusService;
 
-        public CampusController(CampusService campusService)
+        public CampusController(ICampusService campusService)
         {
             _campusService = campusService;
         }

@@ -10,9 +10,9 @@ namespace Service
 {
     public class EventCategoryService:IEventCategoryService
     {
-            private readonly UnitOfWork _unitOfWork;
+            private readonly IUnitOfWork _unitOfWork;
 
-        public EventCategoryService(UnitOfWork unitOfWork)
+        public EventCategoryService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }

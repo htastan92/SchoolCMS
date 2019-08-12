@@ -6,9 +6,9 @@ namespace Admin.Controllers
 {
     public class FormController : Controller
     {
-        private readonly FormService _formService;
+        private readonly IFormService _formService;
 
-        public FormController(FormService formService)
+        public FormController(IFormService formService)
         {
             _formService = formService;
         }

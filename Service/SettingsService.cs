@@ -4,11 +4,11 @@ using Entities;
 
 namespace Service
 {
-    public class SettingsService
+    public class SettingsService : ISettingsService
     {
-        private readonly UnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public SettingsService(UnitOfWork unitOfWork)
+        public SettingsService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
@@ -31,5 +31,11 @@ namespace Service
 
             return editedSettings.Id;
         }
+    }
+
+    public interface ISettingsService
+    {
+        Settings Get();
+        int Edit(Settings editedSettings);
     }
 }

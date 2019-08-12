@@ -6,9 +6,9 @@ namespace Admin.Controllers
 {
     public class LoginController : Controller
     {
-        private readonly MemberService _memberService;
+        private readonly IMemberService _memberService;
 
-        public LoginController(MemberService memberService)
+        public LoginController(IMemberService memberService)
         {
             _memberService = memberService;
         }

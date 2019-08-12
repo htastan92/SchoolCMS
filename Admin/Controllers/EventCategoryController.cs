@@ -7,9 +7,9 @@ namespace Admin.Controllers
 {
     public class EventCategoryController : Controller
     {
-        private readonly EventCategoryService _eventCategoryService;
+        private readonly IEventCategoryService _eventCategoryService;
 
-        public EventCategoryController(EventCategoryService eventCategoryService)
+        public EventCategoryController(IEventCategoryService eventCategoryService)
         {
             _eventCategoryService = eventCategoryService;
         }
