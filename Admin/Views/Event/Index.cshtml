@@ -1,7 +1,39 @@
-﻿
+﻿@model Admin.Models.EventListViewModel
 @{
-    ViewData["Title"] = "Index";
+    ViewBag.Title = "Etkinlikler";
 }
 
-<h2>Index</h2>
+<h2>@ViewBag.Title</h2>
+<table class="table" id="myTable">
+    <thead>
+        <tr>
+            <th>Görsel</th>
+            <th>Etkinlik Adı</th>
+            <th>Yer</th>
+            <th>Durum</th>
+            <th>Başlangıç Tarihi</th>
+            <th>Bitiş Tarihi</th>
+            <th>Kampüs</th>
+            <th nowrap>Eylemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in Model.Events)
+        {
+            <tr>
+                <td>@x.Image</td>
+                <td>@x.Name</td>
+                <td>@x.Location</td>
+                <td>@x.Status.Name</td>
+                <td>@x.StartDate</td>
+                <td>@x.EndDate</td>
+                <td>@x.Campus.Name</td>
+                <td><a href="@Url.Action("Edit","Event" ,new {id=@x.Id})" class="btn btn-success">Düzenle</a></td>
+                <td><a href="@Url.Action("Remove","Event" ,new {id=@x.Id})" class="btn btn-danger">Sil</a></td>
+                <td><a href="@Url.Action("Draft","Event" ,new {id=@x.Id})" class="btn btn-warning">Taslak Yap</a></td>
+                <td><a href="@Url.Action("Publish","Event" ,new {id=@x.Id})" class="btn btn-info">Yayınla</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
 

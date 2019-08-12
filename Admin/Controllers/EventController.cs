@@ -28,7 +28,7 @@ namespace Admin.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult New(EventNewViewModel viewModel)
+        public IActionResult New(EventNewViewModel viewModel)   
         {
             if (!ModelState.IsValid)
                 return View(viewModel);
