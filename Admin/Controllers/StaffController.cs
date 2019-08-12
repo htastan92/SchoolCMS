@@ -26,6 +26,7 @@ namespace Admin.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public IActionResult New(StaffNewViewModel viewModel)
         {
@@ -61,6 +62,7 @@ namespace Admin.Controllers
             };
             return View(viewModel);
         }
+
         [HttpPost]
         public IActionResult Edit(StaffEditViewModel viewModel)
         {

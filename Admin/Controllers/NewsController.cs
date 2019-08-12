@@ -13,6 +13,7 @@ namespace Admin.Controllers
         {
             _newsService = newsService;
         }
+
         public IActionResult Index()
         {
             NewsListViewModel viewModel = new NewsListViewModel()
@@ -26,6 +27,7 @@ namespace Admin.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public IActionResult New(NewsNewViewModel viewModel)
         {
@@ -65,6 +67,7 @@ namespace Admin.Controllers
             };
             return View(viewModel);
         }
+
         [HttpPost]
         public IActionResult Edit(NewsEditViewModel viewModel)
         {
@@ -84,7 +87,6 @@ namespace Admin.Controllers
             _newsService.Edit(editedNews);
             return RedirectToAction("Index");
         }
-
 
         public IActionResult Publish(int? id)
         {
