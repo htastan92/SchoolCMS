@@ -5,7 +5,7 @@ using Entities;
 
 namespace Service
 {
-    public class EventService
+    public class EventService:IEventService
     {
         private readonly UnitOfWork _unitOfWork;
 
@@ -110,5 +110,18 @@ namespace Service
                 return false;
             }
         }
+    }
+
+    public interface IEventService
+    {
+        Event GetAdmin(int? id);
+        Event GetWeb(string slug);
+        IList<Event> GetAllAdmin();
+        IList<Event> GetAllWeb();
+        int New(Event addEvent);
+        int Edit(Event editEvent);
+        bool Draft(int? id);
+        bool Publish(int? id);
+        bool Remove(int? id);
     }
 }

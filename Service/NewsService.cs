@@ -5,7 +5,7 @@ using Entities;
 
 namespace Service
 {
-    public class NewsService
+    public class NewsService:INewsService
     {
         private readonly UnitOfWork _unitOfWork;
 
@@ -109,5 +109,18 @@ namespace Service
                 return false;
             }
         }
+    }
+
+    public interface INewsService
+    {
+        News GetAdmin(int? id);
+        News GetWeb(string slug);
+        IList<News> GetAllAdmin();
+        IList<News> GetAllWeb();
+        int New(News news);
+        int Edit(News news);
+        bool Publish(int? id);
+        bool Draft(int? id);
+        bool Remove(int? id);
     }
 }

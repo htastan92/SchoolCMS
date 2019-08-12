@@ -4,7 +4,7 @@ using Entities;
 
 namespace Service
 {
-    public class StatusService
+    public class StatusService:IStatusService
     {
         public Status Get(int id)
         {
@@ -13,5 +13,10 @@ namespace Service
                 return db.Statuses.FirstOrDefault(s => s.Id == id);
             }
         }
+    }
+
+    public interface IStatusService
+    {
+        Status Get(int id);
     }
 }

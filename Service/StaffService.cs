@@ -5,7 +5,7 @@ using Entities;
 
 namespace Service
 {
-    public class StaffService
+    public class StaffService:IStaffService
     {
         private readonly UnitOfWork _unitOfWork;
 
@@ -113,5 +113,18 @@ namespace Service
                 return false;
             }
         }
+    }
+
+    public interface IStaffService
+    {
+        Staff GetAdmin(int? id);
+        Staff GetWeb(int? id);
+        IList<Staff> GetAllAdmin(); 
+        IList<Staff> GetAllWeb();
+        int New(Staff staff);
+        int Edit(Staff staff);
+        bool Publish(int? id);
+        bool Draft(int? id);
+        bool Remove(int? id);
     }
 }

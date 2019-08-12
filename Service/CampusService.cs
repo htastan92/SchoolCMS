@@ -5,7 +5,7 @@ using Entities;
 
 namespace Service
 {
-    public class CampusService
+    public class CampusService:ICampusService
     {
         private readonly UnitOfWork _unitOfWork;
 
@@ -110,5 +110,18 @@ namespace Service
                 return false;
             }
         }
+    }
+
+    public interface ICampusService
+    {
+        Campus GetAdmin(int? id);
+        Campus GetWeb(string slug);
+        IList<Campus> GetAllAdmin();
+        IList<Campus> GetAllWeb();
+        int New(Campus campus);
+        int Edit(Campus campus);
+        bool Draft(int? id);
+        bool Publish(int? id);
+        bool Remove(int? id);
     }
 }

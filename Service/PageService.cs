@@ -5,7 +5,7 @@ using Entities;
 
 namespace Service
 {
-    public class PageService
+    public class PageService:IPageService
     {
         private readonly UnitOfWork _unitOfWork;
 
@@ -109,5 +109,19 @@ namespace Service
                 return false;
             }
         }
+    }
+
+    public interface IPageService
+    {
+        Page GetAdmin(int id);
+        Page GetWeb(string slug);
+        IList<Page> GetAllAdmin();
+        IList<Page> GetAllWeb();
+        int New(Page page);
+        int Edit(Page page);
+        bool Publish(int id);
+        bool Draft(int id);
+        bool Delete(int id);
+
     }
 }
