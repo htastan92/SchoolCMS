@@ -11,9 +11,9 @@ namespace Admin.Models
         public string Description { get; set; }
         public string EditorContent { get; set; }
 
-        public Status Status { get; set; }
+        public int StatusId { get; set; }
 
-        public Image Image { get; set; }
+        public int ImageId { get; set; }
 
     }
 }

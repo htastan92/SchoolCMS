@@ -13,7 +13,7 @@ namespace Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // News <=> News Category
-            modelBuilder.Entity<NewsCategoryNews>().HasKey(c => new { c.NewsId, c.NewsCategoryId});
+            modelBuilder.Entity<NewsCategoryNews>().HasKey(c => new { c.NewsId, c.NewsCategoryId });
             modelBuilder.Entity<NewsCategoryNews>()
                 .HasOne(cs => cs.News)
                 .WithMany(s => s.NewsCategoryNews)
@@ -24,7 +24,7 @@ namespace Data
                 .HasForeignKey(cs => cs.NewsCategoryId);
 
             // Event <=> Event Category
-            modelBuilder.Entity<EventCategoryEvent>().HasKey(c => new { c.EventId, c.EventCategoryId});
+            modelBuilder.Entity<EventCategoryEvent>().HasKey(c => new { c.EventId, c.EventCategoryId });
             modelBuilder.Entity<EventCategoryEvent>()
                 .HasOne(cs => cs.Event)
                 .WithMany(s => s.EventCategoryEvent)
@@ -64,11 +64,13 @@ namespace Data
         public DbSet<EventCategory> EventCategories { get; set; }
         public DbSet<EventCategoryEvent> EventCategoryEvent { get; set; }
 
-        
+
         public DbSet<Campus> Campuses { get; set; }
         public DbSet<Form> Forms { get; set; }
         public DbSet<MenuElement> MenuElements { get; set; }
         public DbSet<Page> Pages { get; set; }
         public DbSet<Staff> Staff { get; set; }
+        public DbSet<Carousel> Carousels { get; set; }
+        public DbSet<Review> Reviews { get; set; }
     }
 }

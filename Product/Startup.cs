@@ -31,12 +31,15 @@ namespace Product
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddSingleton<SchoolContext,SchoolContext>();
+            services.AddSingleton<SchoolContext, SchoolContext>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<ICampusService, CampusService>();
             services.AddScoped<IEventService, EventService>();
             services.AddScoped<INewsService, NewsService>();
             services.AddScoped<IPageService, PageService>();
+            services.AddScoped<IMenuService, MenuService>();
+            services.AddScoped<IStaffService, StaffService>();
+            services.AddScoped<ICarouselService, CarouselService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Data;
 using Entities;
 
 namespace Service
 {
-    public class EventService:IEventService
+    public class EventService : IEventService
     {
         private readonly IUnitOfWork _unitOfWork;
 
@@ -44,6 +45,19 @@ namespace Service
             {
                 return db.Events.Where(e => e.Status.Id == (int)Statuses.Published).ToList();
             }
+        }
+
+        public IList<Event> UpcomingEvents()
+        {
+            using (var db = new SchoolContext())
+            {
+                return db.Events
+                    .Where(e => e.Status.Id == (int)Statuses.Published && e.StartDate > DateTime.Now)
+                    .OrderBy(e => e.EndDate)
+                    .Take(8)
+                    .ToList();
+            }
+
         }
 
         public IList<EventCategory> GetEventCategories(int eventId)
@@ -135,6 +149,7 @@ namespace Service
         Event GetWeb(string slug);
         IList<Event> GetAllAdmin();
         IList<Event> GetAllWeb();
+        IList<Event> UpcomingEvents();
         int New(Event addEvent);
         int Edit(Event editEvent);
         bool Draft(int? id);
