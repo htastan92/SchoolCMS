@@ -7,9 +7,9 @@ namespace Service
 {
     public class NewsService:INewsService
     {
-        private readonly UnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public NewsService(UnitOfWork unitOfWork)
+        public NewsService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }

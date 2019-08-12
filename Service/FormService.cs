@@ -5,7 +5,7 @@ using Entities;
 
 namespace Service
 {
-    public class FormService
+    public class FormService:IFormService
     {
         private readonly UnitOfWork _unitOfWork;
 

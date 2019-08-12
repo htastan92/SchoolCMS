@@ -7,9 +7,9 @@ namespace Service
 {
     public class EventService:IEventService
     {
-        private readonly UnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public EventService(UnitOfWork unitOfWork)
+        public EventService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }

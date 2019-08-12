@@ -4,11 +4,11 @@ using Entities;
 
 namespace Service
 {
-    public class ImageService
+    public class ImageService 
     {
-        private readonly UnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public ImageService(UnitOfWork unitOfWork)
+        public ImageService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
@@ -27,5 +27,10 @@ namespace Service
                 return newImage;
             }
         }
+    }
+
+    public interface IImageService
+    {
+        Image Find(string imageUrl);
     }
 }

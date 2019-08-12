@@ -7,9 +7,9 @@ namespace Service
 {
     public class CampusService:ICampusService
     {
-        private readonly UnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public CampusService(UnitOfWork unitOfWork)
+        public CampusService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }

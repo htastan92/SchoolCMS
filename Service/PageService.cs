@@ -7,9 +7,9 @@ namespace Service
 {
     public class PageService:IPageService
     {
-        private readonly UnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public PageService(UnitOfWork unitOfWork)
+        public PageService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
