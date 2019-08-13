@@ -55,5 +55,17 @@ namespace Admin.Helper
             SelectList campuSelectList = new SelectList(campuses, "Id", "Name");
             return campuSelectList;
         }
+
+        public static SelectList parentMenuSelectList()
+        {
+            IEnumerable<MenuElement> menuElements;
+            using (SchoolContext db = new SchoolContext())
+            {
+                menuElements = db.MenuElements.ToList();
+            }
+
+            SelectList menuElementList = new SelectList(menuElements, "Id", "Name");
+            return menuElementList;
+        }
     }
 }

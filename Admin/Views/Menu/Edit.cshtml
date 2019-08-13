@@ -1,7 +1,55 @@
 ﻿@model Admin.Models.MenuElementEditViewModel
-@{
-    ViewData["Title"] = "Edit";
-}
+@using Admin.Helper
 
-<h2>Edit</h2>
+@using (@Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.Id)
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.DisplayNameFor(model => model.Name)
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.DisplayNameFor(model => model.Url)
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Url, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Url, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.DisplayNameFor(model => model.MenuLocation)
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MenuLocation, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MenuLocation, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.DisplayNameFor(model => model.ParentMenuId)
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.ParentMenuId, SelectListHelper.parentMenuSelectList(), htmlAttributes: new { @class = "form-control", multiple = "" })
+                @Html.ValidationMessageFor(model => model.ParentMenuId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.DisplayNameFor(model => model.StatusId)
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.StatusId, SelectListHelper.StatusSelectList(), htmlAttributes: new { @class = "form-control", multiple = "" })
+                @Html.ValidationMessageFor(model => model.StatusId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md">
+
+                <input type="submit" value="Oluştur" class="btn btn-info" />
+                @Html.ActionLink("Geri Dön", "Index", "Event", null, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+}
 

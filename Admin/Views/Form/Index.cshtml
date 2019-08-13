@@ -1,7 +1,36 @@
 ﻿@model Admin.Models.FormListViewModel
-@{
-    ViewData["Title"] = "Index";
-}
 
-<h2>Index</h2>
+<table class="table table-bordered" id="dataTable">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Veli Adı Soyadı</th>
+        <th>Öğrenci Adı Soyadı</th>
+        <th>Telefon No</th>
+        <th>Email Adresi</th>
+        <th>Kampüs</th>
+        <th nowrap>Eylemler</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var x in Model.Forms)
+    {
+        <tr>
+            <td>@x.Id</td>
+            <td>@x.ParentFullName</td>
+            <td>@x.StudentFullName</td>
+            <td>@x.TelephoneNumber</td>
+            <td>@x.EmailAddress</td>
+            <td>@x.Campus.Name</td>
+            <td>
+                <a href="@Url.Action("Edit", "Event", new {id = @x.Id})" class="btn btn-success">Düzenle</a>
+                <a href="@Url.Action("Remove", "Event", new {id = @x.Id})" class="btn btn-danger">Sil</a>
+                <a href="@Url.Action("Draft", "Event", new {id = @x.Id})" class="btn btn-warning">Taslak Yap</a>
+                <a href="@Url.Action("Publish", "Event", new {id = @x.Id})" class="btn btn-info">Yayınla</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
 

@@ -1,7 +1,34 @@
 ﻿@model Admin.Models.EventCategoryNewViewModel
-@{
-    ViewData["Title"] = "Index";
+@using Admin.Helper
+
+@using (@Html.BeginForm())
+{
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.DisplayNameFor(model => model.Name)
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.DisplayNameFor(model => model.StatusId)
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.StatusId, SelectListHelper.campusSelectList(), htmlAttributes: new { @class = "form-control", multiple = "" })
+                @Html.ValidationMessageFor(model => model.StatusId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md">
+
+                <input type="submit" value="Oluştur" class="btn btn-info" />
+                @Html.ActionLink("Geri Dön", "Index", "Event", null, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
 }
-
-<h2>Index</h2>
-

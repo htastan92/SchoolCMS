@@ -1,7 +1,18 @@
 ﻿@model Admin.Models.FormDetailViewModel
-@{
-    ViewData["Title"] = "Index";
-}
 
-<h2>Index</h2>
+<h4>Form Detayı</h4>
+<hr/>
+<dl class="dl-horizontal">
+    <dt>@Html.DisplayNameFor(model=>model.ParentFullName)</dt>
+    <dd>@Html.DisplayNameFor(model=>model.StudentFullName)</dd>
+    <dt>@Html.DisplayNameFor(model=>model.TelephoneNumber)</dt>
+    <dd>@Html.DisplayNameFor(model=>model.EmailAddress)</dd>
+    <dt>@Html.DisplayNameFor(model=>model.CampusId)</dt>
+</dl>
+<div class="form-group">
+    <div class="col-md">
 
+        <input type="submit" value="Oluştur" class="btn btn-info" />
+        @Html.ActionLink("Geri Dön", "Index", "Event", null, new { @class = "btn btn-primary" })
+    </div>
+</div>

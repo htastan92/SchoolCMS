@@ -1,7 +1,62 @@
-﻿
-@{
-    ViewData["Title"] = "Edit";
-}
+﻿@model Admin.Models.PageEditViewModel
+@using Admin.Helper
 
-<h2>Edit</h2>
+@using (@Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.Id)
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.DisplayNameFor(model => model.Name)
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.DisplayNameFor(model => model.Slug)
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Slug, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Slug, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.DisplayNameFor(model => model.Description)
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.DisplayNameFor(model => model.EditorContent)
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EditorContent, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EditorContent, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.DisplayNameFor(model => model.ImageId)
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ImageId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ImageId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.DisplayNameFor(model => model.StatusId)
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.StatusId, SelectListHelper.StatusSelectList(), htmlAttributes: new { @class = "form-control", multiple = "" })
+                @Html.ValidationMessageFor(model => model.StatusId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+       
+        <div class="form-group">
+            <div class="col-md">
+
+                <input type="submit" value="Oluştur" class="btn btn-info" />
+                @Html.ActionLink("Geri Dön", "Index", "Event", null, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+}
 
