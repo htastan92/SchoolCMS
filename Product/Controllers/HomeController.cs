@@ -84,7 +84,7 @@ namespace Product.Controllers
             return View(viewModel);
         }
 
-        [Route("{pageSlug}")]
+        [Route("sayfa/{pageSlug}")]
         public IActionResult PageDetail(string pageSlug)
         {
             if (pageSlug == null)
@@ -174,6 +174,17 @@ namespace Product.Controllers
                 ImageUrl = findNews.Image.Url,
                 EditorContent = findNews.EditorContent,
                 Categories = findCategoriesOfNews
+            };
+
+            return View(viewModel);
+        }
+
+        [Route("iletisim")]
+        public IActionResult Contact()
+        {
+            ContactViewModel viewModel = new ContactViewModel
+            {
+
             };
 
             return View(viewModel);

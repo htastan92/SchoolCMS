@@ -2,5 +2,14 @@
     ViewData["Title"] = "404";
 }
 
-<h1>404!</h1>
-<h3>Aradığınız sayfa bulunamadı.</h3>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="text-danger">404!</h1>
+            <p>Üzgünüz. Fakat aradığınız sayfa bulunamadı. Bağlantı silinmiş veya değiştirilmiş olabilir. Bağlantının doğruluğundan emin olun</p>
+        </div>
+        <div class="col-md-12 mt-4">
+            <a class="default-btn" href="@Url.Action("Index")">Ana Sayfa'ya dön.</a>
+        </div>
+    </div>
+</div>
