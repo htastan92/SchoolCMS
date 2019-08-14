@@ -1,4 +1,5 @@
-﻿using Entities;
+﻿using System.Linq;
+using Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data
@@ -33,7 +34,10 @@ namespace Data
                 .HasOne(cs => cs.EventCategory)
                 .WithMany(c => c.EventCategoryEvent)
                 .HasForeignKey(cs => cs.EventCategoryId);
-
+            foreach (var foreignkey in modelBuilder.Model.GetEntityTypes().SelectMany(e=>e.GetForeignKeys()))
+            {
+                foreignkey.DeleteBehavior = DeleteBehavior.Restrict;
+            }
             #region Seeding
 
             // Member

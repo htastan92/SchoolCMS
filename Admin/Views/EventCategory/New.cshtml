@@ -1,6 +1,8 @@
 ﻿@model Admin.Models.EventCategoryNewViewModel
 @using Admin.Helper
-
+@{
+    ViewBag.Title = "Yeni Etkinlik Kategorisi";
+}
 @using (@Html.BeginForm())
 {
 
@@ -18,7 +20,7 @@
         <div class="form-group">
             @Html.DisplayNameFor(model => model.StatusId)
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.StatusId, SelectListHelper.campusSelectList(), htmlAttributes: new { @class = "form-control", multiple = "" })
+                @Html.DropDownListFor(model => model.StatusId, SelectListHelper.campusSelectList(), htmlAttributes: new { @class = "form-control"})
                 @Html.ValidationMessageFor(model => model.StatusId, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -26,7 +28,7 @@
         <div class="form-group">
             <div class="col-md">
 
-                <input type="submit" value="Oluştur" class="btn btn-info" />
+                <input type="submit" value="Oluştur" class="btn btn-primary" />
                 @Html.ActionLink("Geri Dön", "Index", "Event", null, new { @class = "btn btn-primary" })
             </div>
         </div>

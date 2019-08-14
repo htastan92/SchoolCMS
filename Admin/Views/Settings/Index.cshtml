@@ -1,1 +1,91 @@
 ﻿@model Admin.Models.SettingsViewModel
+@{
+    ViewBag.Title = "Ayarlar";
+}
+@using (@Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.Id)
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.DisplayNameFor(model => model.FacebookUrl)
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FacebookUrl, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FacebookUrl, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.DisplayNameFor(model => model.InstagramUrl)
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.InstagramUrl, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.InstagramUrl, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.DisplayNameFor(model => model.TwitterUrl)
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TwitterUrl, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TwitterUrl, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.DisplayNameFor(model => model.YouTubeUrl)
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.YouTubeUrl, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.YouTubeUrl, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.DisplayNameFor(model => model.GeneralAddress)
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.GeneralAddress, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.GeneralAddress, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.DisplayNameFor(model => model.GeneralEmailAddress)
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.GeneralEmailAddress, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.GeneralEmailAddress, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.DisplayNameFor(model => model.GeneralTelephone)
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.GeneralTelephone, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.GeneralTelephone, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.DisplayNameFor(model => model.SiteDescription)
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SiteDescription, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SiteDescription, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.DisplayNameFor(model => model.SiteTags)
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SiteTags, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SiteTags, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.DisplayNameFor(model => model.SiteTitle)
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SiteTitle, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SiteTitle, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md">
+
+                <input type="submit" value="Oluştur" class="btn btn-primary" />
+                @Html.ActionLink("Geri Dön", "Index", "Event", null, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+}

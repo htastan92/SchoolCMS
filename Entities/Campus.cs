@@ -12,5 +12,7 @@ namespace Entities
         public ICollection<Staff> Staff { get; set; }
         public ICollection<Event> Events { get; set; }
         public ICollection<News> News { get; set; }
+        public ICollection<Form> Forms { get; set; }
+        
     }
 }

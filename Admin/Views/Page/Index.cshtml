@@ -1,27 +1,30 @@
 ﻿@model Admin.Models.PageListViewModel
+@{
+    ViewBag.Title = "Sayfalar";
+}
 <table class="table table-bordered" id="dataTable">
     <thead>
-    <tr>
-        <th>Id</th>
-        <th>Haber Adı</th>
-        <th>Durumu</th>
-        <th nowrap>Eylemler</th>
-    </tr>
+        <tr>
+            <th>Id</th>
+            <th>Haber Adı</th>
+            <th>Durumu</th>
+            <th nowrap>Eylemler</th>
+        </tr>
     </thead>
     <tbody>
-    @foreach (var x in Model.Pages)
-    {
-        <tr>
-            <td>@x.Id</td>
-            <td>@x.Name</td>
-            <td>@x.Status.Name</td>
-            <td>
-                <a href="@Url.Action("Edit", "Event", new {id = @x.Id})" class="btn btn-success">Düzenle</a>
-                <a href="@Url.Action("Remove", "Event", new {id = @x.Id})" class="btn btn-danger">Sil</a>
-                <a href="@Url.Action("Draft", "Event", new {id = @x.Id})" class="btn btn-warning">Taslak Yap</a>
-                <a href="@Url.Action("Publish", "Event", new {id = @x.Id})" class="btn btn-info">Yayınla</a>
-            </td>
-        </tr>
-    }
+        @foreach (var x in Model.Pages)
+        {
+            <tr>
+                <td>@x.Id</td>
+                <td>@x.Name</td>
+                <td>@x.Status.Name</td>
+                <td>
+                    <a href="@Url.Action("Edit", "Event", new {id = @x.Id})" class="btn btn-success">Düzenle</a>
+                    <a href="@Url.Action("Remove", "Event", new {id = @x.Id})" class="btn btn-danger">Sil</a>
+                    <a href="@Url.Action("Draft", "Event", new {id = @x.Id})" class="btn btn-warning">Taslak Yap</a>
+                    <a href="@Url.Action("Publish", "Event", new {id = @x.Id})" class="btn btn-info">Yayınla</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Entities
 {
@@ -11,15 +12,14 @@ namespace Entities
         public string EmailAddress { get; set; }
 
         public int StatusId { get; set; }
-        public Status Status { get; set; }
 
         public DateTime CreationDate { get; set; }
         public DateTime EditDate { get; set; }
 
         public int CreatorMemberId { get; set; }
-        public Member CreatorMember { get; set; }
 
         public int EditorMemberId { get; set; }
-        public Member EditorMember { get; set; }
+
+        public ICollection<Settings> Settings { get; set; }
     }
 }

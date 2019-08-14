@@ -17,7 +17,7 @@ namespace Service
         {
             using (var db = new SchoolContext())
             {
-                return db.Members.FirstOrDefault(m => m.Id == id && m.Status.Id == (int)Statuses.Published);
+                return db.Members.FirstOrDefault(m => m.Id == id && m.StatusId == (int)Statuses.Published);
             }
         }
 
@@ -26,7 +26,7 @@ namespace Service
             using (var db = new SchoolContext())
             {
                 return db.Members
-                    .Where(m => m.Status.Id != (int)Statuses.Removed)
+                    .Where(m => m.StatusId != (int)Statuses.Removed)
                     .ToList();
             }
         }
@@ -57,7 +57,7 @@ namespace Service
         {
             try
             {
-                Get(id).Status.Id = (int)Statuses.Published;
+                Get(id).StatusId = (int)Statuses.Published;
                 _unitOfWork.SaveChanges();
                 return true;
             }
@@ -71,7 +71,7 @@ namespace Service
         {
             try
             {
-                Get(id).Status.Id = (int)Statuses.Draft;
+                Get(id).StatusId = (int)Statuses.Draft;
                 _unitOfWork.SaveChanges();
                 return true;
             }
@@ -85,7 +85,7 @@ namespace Service
         {
             try
             {
-                Get(id).Status.Id = (int)Statuses.Removed;
+                Get(id).StatusId = (int)Statuses.Removed;
                 _unitOfWork.SaveChanges();
                 return true;
             }

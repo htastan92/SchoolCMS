@@ -1,37 +1,39 @@
 ﻿@model Admin.Models.StaffListViewModel
 <p>
-    @Html.ActionLink("Yeni Kampüs", "New", "Campus", null,new { @class = "btn btn-primary" })
+    @Html.ActionLink("Yeni Kampüs", "New", "Campus", null, new { @class = "btn btn-primary" })
 </p>
-
+@{
+    ViewBag.Title = "Eğitmenler";
+}
 <table class="table table-bordered" id="dataTable">
     <thead>
-    <tr>
-        <th>Eğitmen Id</th>
-        <th>Eğitmen Adı Soyadı</th>
-        <th>Branşı</th>
-        <th>Açıklama</th>
-        <th>Durumu</th>
-        <th>Kampüs</th>
-        <th nowrap>Eylemler</th>
-    </tr>
+        <tr>
+            <th>Eğitmen Id</th>
+            <th>Eğitmen Adı Soyadı</th>
+            <th>Branşı</th>
+            <th>Açıklama</th>
+            <th>Durumu</th>
+            <th>Kampüs</th>
+            <th nowrap>Eylemler</th>
+        </tr>
     </thead>
     <tbody>
-    @foreach (var campus in Model.Staff)
-    {
-        <tr>
-            <td>@campus.Id</td>
-            <td>@campus.FullName</td>
-            <td>@campus.Sector</td>
-            <td>@campus.BioText</td>
-            <td>@campus.Status.Name</td>
-            <td>@campus.Campus.Name</td>
-            <td>
-                <a href="@Url.Action("Edit", new {id = campus.Id})" class="btn btn-success btn-sm">Düzenle</a>
-                <a href="@Url.Action("Draft", new {id = campus.Id})" class="btn btn-warning btn-sm">Taslak</a>
-                <a href="@Url.Action("Publish", new {id = campus.Id})" class="btn btn-info btn-sm">Yayınla</a>
-                <a href="@Url.Action("Remove", new {id = campus.Id})" class="btn btn-danger btn-sm" onclick="return confirm('Bu kaydı silmek istediğinize emin misiniz?');">Sil</a>
-            </td>
-        </tr>
-    }
+        @foreach (var campus in Model.Staff)
+        {
+            <tr>
+                <td>@campus.Id</td>
+                <td>@campus.FullName</td>
+                <td>@campus.Sector</td>
+                <td>@campus.BioText</td>
+                <td>@campus.Status.Name</td>
+                <td>@campus.Campus.Name</td>
+                <td>
+                    <a href="@Url.Action("Edit", new {id = campus.Id})" class="btn btn-success btn-sm">Düzenle</a>
+                    <a href="@Url.Action("Draft", new {id = campus.Id})" class="btn btn-warning btn-sm">Taslak</a>
+                    <a href="@Url.Action("Publish", new {id = campus.Id})" class="btn btn-info btn-sm">Yayınla</a>
+                    <a href="@Url.Action("Remove", new {id = campus.Id})" class="btn btn-danger btn-sm" onclick="return confirm('Bu kaydı silmek istediğinize emin misiniz?');">Sil</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
