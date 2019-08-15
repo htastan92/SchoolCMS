@@ -10,7 +10,9 @@
 
         @Html.ValidationSummary(false, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.DisplayNameFor(model => model.Name)
+           <div class="col-md-2">
+                @Html.DisplayNameFor(model => model.Name)
+            </div>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
@@ -29,7 +31,7 @@
             <div class="col-md">
 
                 <input type="submit" value="Oluştur" class="btn btn-primary" />
-                @Html.ActionLink("Geri Dön", "Index", "Event", null, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Geri Dön", "Index", "EventCategory", null, new { @class = "btn btn-primary" })
             </div>
         </div>
     </div>

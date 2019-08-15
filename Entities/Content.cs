@@ -4,6 +4,10 @@ namespace Entities
 {
     public class Content
     {
+        public Content()
+        {
+   
+        }
         public int Id { get; set; }
 
         public string Name { get; set; }
@@ -17,13 +21,13 @@ namespace Entities
         public int ImageId { get; set; }
         public Image Image { get; set; }
 
-        public DateTime CreationDate { get; set; }
-        public DateTime EditDate { get; set; }
+        public DateTime? CreationDate { get; set; }
+        public DateTime? EditDate { get; set; }
 
-        public int CreatorMemberId { get; set; }
+        public int? CreatorMemberId { get; set; }
         public Member CreatorMember { get; set; }
 
-        public int EditorMemberId { get; set; }
+        public int? EditorMemberId { get; set; }
         public Member EditorMember { get; set; }
     }
 }

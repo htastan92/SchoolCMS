@@ -1,9 +1,11 @@
-﻿using Admin.Models;
+﻿using Admin.Helper;
+using Admin.Models;
 using Microsoft.AspNetCore.Mvc;
 using Service;
 
 namespace Admin.Controllers
 {
+    [SessionFilter]
     public class FormController : Controller
     {
         private readonly IFormService _formService;

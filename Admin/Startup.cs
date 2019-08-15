@@ -18,8 +18,6 @@ namespace Admin
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-
-            // dotnet sql-cache create "Server=94.73.170.20;Database=u7801466_dbTestx;User Id=u7801466_userE86;Password=IDyk81F0;" dbo Sessions
             _schoolContext.Database.EnsureCreated();
         }
 

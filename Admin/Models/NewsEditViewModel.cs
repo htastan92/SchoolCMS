@@ -19,7 +19,6 @@ namespace Admin.Models
 
         [Display(Name = "Açıklama")]
         [MaxLength(120)]
-        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
         [Display(Name = "İçerik")]

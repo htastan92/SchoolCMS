@@ -1,10 +1,12 @@
-﻿using Admin.Models;
+﻿using Admin.Helper;
+using Admin.Models;
 using Entities;
 using Microsoft.AspNetCore.Mvc;
 using Service;
 
 namespace Admin.Controllers
 {
+    [SessionFilter]
     public class EventController : Controller
     {
         private readonly IEventService _eventService;

@@ -1,10 +1,12 @@
-﻿using Admin.Models;
+﻿using Admin.Helper;
+using Admin.Models;
 using Entities;
 using Microsoft.AspNetCore.Mvc;
 using Service;
 
 namespace Admin.Controllers
 {
+    [SessionFilter]
     public class EventCategoryController : Controller
     {
         private readonly IEventCategoryService _eventCategoryService;
@@ -48,7 +50,7 @@ namespace Admin.Controllers
 
             var findEvent = _eventCategoryService.Get(id);
             if (findEvent == null)
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","EventCategory");
 
             EventCategoryEditViewModel viewModel = new EventCategoryEditViewModel()
             {
@@ -72,7 +74,7 @@ namespace Admin.Controllers
 
             };
             _eventCategoryService.Edit(editedEventCategory);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index","EventCategory");
         }
 
         public IActionResult Publish(int? id)

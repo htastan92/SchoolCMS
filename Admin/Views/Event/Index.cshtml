@@ -1,8 +1,11 @@
 ﻿@model Admin.Models.EventListViewModel
 
 @{
-    ViewBag.Title = "Kampüsler";
+    ViewBag.Title = "Etkinlikler";
 }
+<p>
+    @Html.ActionLink("Yeni Etkinlik", "New", "Event", null, new { @class = "btn btn-primary" })
+</p>
 <table class="table table-bordered" id="dataTable">
     <thead>
         <tr>
@@ -36,3 +39,9 @@
     </tbody>
 </table>
 
+@section Javascript
+{
+    <script src="@Url.Content("~/Assets/vendor/datatables/jquery.dataTables.js")"></script>
+    <script src="@Url.Content("~/Assets/vendor/datatables/dataTables.bootstrap4.js")"></script>
+    <script src="@Url.Content("~/Assets/js/demo/datatables-demo.js")"></script>
+}

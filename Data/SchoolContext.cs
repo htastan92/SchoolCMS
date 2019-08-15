@@ -34,10 +34,12 @@ namespace Data
                 .HasOne(cs => cs.EventCategory)
                 .WithMany(c => c.EventCategoryEvent)
                 .HasForeignKey(cs => cs.EventCategoryId);
-            foreach (var foreignkey in modelBuilder.Model.GetEntityTypes().SelectMany(e=>e.GetForeignKeys()))
+
+            foreach (var foreignkey in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
             {
                 foreignkey.DeleteBehavior = DeleteBehavior.Restrict;
             }
+
             #region Seeding
 
             // Member
@@ -49,6 +51,10 @@ namespace Data
                 new Status { Id = 1, Name = "Yayında" },
                 new Status { Id = 2, Name = "Taslak" },
                 new Status { Id = 3, Name = "Silinmiş" });
+
+            modelBuilder.Entity<Image>().HasData(
+                new Image { Id = 1, Url = "babosko.jpg" }
+            );
 
             #endregion
         }

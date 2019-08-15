@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Data;
 using Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Service
 {
@@ -56,7 +57,7 @@ namespace Service
             using (var db = new SchoolContext())
             {
                 db.Carousels.Add(carousel);
-                _unitOfWork.SaveChanges();
+                db.SaveChanges();
             }
 
             return carousel.Id;
@@ -67,7 +68,7 @@ namespace Service
             using (var db = new SchoolContext())
             {
                 db.Carousels.Update(carousel);
-                _unitOfWork.SaveChanges();
+                db.SaveChanges();
             }
 
             return carousel.Id;
@@ -77,8 +78,14 @@ namespace Service
         {
             try
             {
-                GetAdmin(id).Status.Id = (int)Statuses.Published;
-                _unitOfWork.SaveChanges();
+                using (var db = new SchoolContext())
+                {
+                    var findCarousel = db.Carousels.Find(id);
+                    findCarousel.StatusId = (int)Statuses.Published;
+                    db.Entry(findCarousel).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+
                 return true;
             }
             catch
@@ -91,8 +98,13 @@ namespace Service
         {
             try
             {
-                GetAdmin(id).Status.Id = (int)Statuses.Draft;
-                _unitOfWork.SaveChanges();
+                using (var db = new SchoolContext())
+                {
+                    var findCarousel = db.Carousels.Find(id);
+                    findCarousel.StatusId = (int)Statuses.Draft;
+                    db.Entry(findCarousel).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
                 return true;
             }
             catch
@@ -105,8 +117,14 @@ namespace Service
         {
             try
             {
-                GetAdmin(id).Status.Id = (int)Statuses.Removed;
-                _unitOfWork.SaveChanges();
+                using (var db = new SchoolContext())
+                {
+                    var findCarousel = db.Carousels.Find(id);
+                    findCarousel.StatusId = (int)Statuses.Removed;
+                    db.Entry(findCarousel).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+
                 return true;
             }
             catch

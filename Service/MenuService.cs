@@ -2,6 +2,7 @@
 using System.Linq;
 using Data;
 using Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Service
 {
@@ -14,19 +15,19 @@ namespace Service
             _unitOfWork = unitOfWork;
         }
 
-        public MenuElement GetAdmin(int id)
+        public MenuElement GetAdmin(int? id)
         {
             using (var db = new SchoolContext())
             {
-                return db.MenuElements.FirstOrDefault(m => m.Id == id && m.Status.Id != (int)Statuses.Removed);
+                return db.MenuElements.Include(s=>s.Status).Include(pm=>pm.ParentMenu).FirstOrDefault(m => m.Id == id && m.Status.Id != (int)Statuses.Removed);
             }
         }
 
-        public MenuElement GetWeb(int id)
+        public MenuElement GetWeb(int? id)
         {
             using (var db = new SchoolContext())
             {
-                return db.MenuElements.FirstOrDefault(m => m.Id == id && m.Status.Id == (int)Statuses.Published);
+                return db.MenuElements.Include(s=>s.Status).Include(pm=>pm.ParentMenu).FirstOrDefault(m => m.Id == id && m.Status.Id == (int)Statuses.Published);
             }
         }
 
@@ -34,7 +35,7 @@ namespace Service
         {
             using (var db = new SchoolContext())
             {
-                return db.MenuElements
+                return db.MenuElements.Include(p=>p.ParentMenu).Include(s=>s.Status)
                     .Where(m => m.Status.Id != (int)Statuses.Removed)
                     .ToList();
             }
@@ -44,7 +45,7 @@ namespace Service
         {
             using (var db = new SchoolContext())
             {
-                return db.MenuElements
+                return db.MenuElements.Include(s=>s.Status).Include(pm=>pm.ParentMenu)
                     .Where(m => m.Status.Id == (int)Statuses.Published)
                     .ToList();
             }
@@ -54,7 +55,7 @@ namespace Service
         {
             using (var db = new SchoolContext())
             {
-                return db.MenuElements
+                return db.MenuElements.Include(s=>s.Status).Include(pm=>pm.ParentMenu)
                     .Where(m => m.MenuLocation == (int)MenuLocations.Header && m.Status.Id == (int)Statuses.Published)
                     .ToList();
             }
@@ -64,7 +65,7 @@ namespace Service
         {
             using (var db = new SchoolContext())
             {
-                return db.MenuElements
+                return db.MenuElements.Include(s=>s.Status).Include(pm=>pm.ParentMenu)
                     .Where(m => m.MenuLocation == (int)MenuLocations.Footer && m.Status.Id == (int)Statuses.Published)
                     .ToList();
             }
@@ -75,7 +76,7 @@ namespace Service
             using (var db = new SchoolContext())
             {
                 db.MenuElements.Add(menuElement);
-                _unitOfWork.SaveChanges();
+                db.SaveChanges();
             }
 
             return menuElement.Id;
@@ -86,18 +87,24 @@ namespace Service
             using (var db = new SchoolContext())
             {
                 db.MenuElements.Update(menuElement);
-                _unitOfWork.SaveChanges();
+                db.SaveChanges();
             }
 
             return menuElement.Id;
         }
 
-        public bool Publish(int id)
+        public bool Publish(int? id)
         {
             try
             {
-                GetAdmin(id).Status.Id = (int)Statuses.Published;
-                _unitOfWork.SaveChanges();
+                using (var db = new SchoolContext())
+                {
+                    var findMenu = db.MenuElements.Find(id);
+                    findMenu.StatusId = (int)Statuses.Published;
+                    db.Entry(findMenu).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+
                 return true;
             }
             catch
@@ -106,12 +113,18 @@ namespace Service
             }
         }
 
-        public bool Draft(int id)
+        public bool Draft(int? id)
         {
             try
             {
-                GetAdmin(id).Status.Id = (int)Statuses.Draft;
-                _unitOfWork.SaveChanges();
+                using (var db = new SchoolContext())
+                {
+                    var findMenu = db.MenuElements.Find(id);
+                    findMenu.StatusId = (int)Statuses.Draft;
+                    db.Entry(findMenu).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+
                 return true;
             }
             catch
@@ -120,12 +133,18 @@ namespace Service
             }
         }
 
-        public bool Remove(int id)
+        public bool Remove(int? id)
         {
             try
             {
-                GetAdmin(id).Status.Id = (int)Statuses.Removed;
-                _unitOfWork.SaveChanges();
+                using (var db = new SchoolContext())
+                {
+                    var findMenu = db.MenuElements.Find(id);
+                    findMenu.StatusId = (int)Statuses.Removed;
+                    db.Entry(findMenu).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+
                 return true;
             }
             catch
@@ -137,16 +156,16 @@ namespace Service
 
     public interface IMenuService
     {
-        MenuElement GetAdmin(int id);
-        MenuElement GetWeb(int id);
+        MenuElement GetAdmin(int? id);
+        MenuElement GetWeb(int? id);
         IList<MenuElement> GetAllAdmin();
         IList<MenuElement> GetAllWeb();
         IList<MenuElement> GetAllHeader();
         IList<MenuElement> GetAllFooter();
         int New(MenuElement menuElement);
         int Edit(MenuElement menuElement);
-        bool Publish(int id);
-        bool Draft(int id);
-        bool Remove(int id);
+        bool Publish(int? id);
+        bool Draft(int? id);
+        bool Remove(int? id);
     }
 }

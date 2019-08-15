@@ -26,7 +26,7 @@ namespace Service
             using (var db = new SchoolContext())
             {
                 db.Settings.Update(editedSettings);
-                _unitOfWork.SaveChanges();
+                db.SaveChanges();
             }
 
             return editedSettings.Id;

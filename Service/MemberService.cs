@@ -2,9 +2,11 @@
 using System.Linq;
 using Data;
 using Entities;
+using Microsoft.EntityFrameworkCore;
+
 namespace Service
 {
-    public class MemberService:IMemberService
+    public class MemberService : IMemberService
     {
         private readonly IUnitOfWork _unitOfWork;
 
@@ -36,7 +38,7 @@ namespace Service
             using (var db = new SchoolContext())
             {
                 db.Members.Add(member);
-                _unitOfWork.SaveChanges();
+                db.SaveChanges();
             }
 
             return member.Id;
@@ -47,7 +49,7 @@ namespace Service
             using (var db = new SchoolContext())
             {
                 db.Members.Update(member);
-                _unitOfWork.SaveChanges();
+                db.SaveChanges();
             }
 
             return member.Id;
@@ -57,8 +59,14 @@ namespace Service
         {
             try
             {
-                Get(id).StatusId = (int)Statuses.Published;
-                _unitOfWork.SaveChanges();
+                using (var db = new SchoolContext())
+                {
+                    var findMember = db.Members.Find(id);
+                    findMember.StatusId = (int)Statuses.Published;
+                    db.Entry(findMember).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+
                 return true;
             }
             catch
@@ -71,8 +79,14 @@ namespace Service
         {
             try
             {
-                Get(id).StatusId = (int)Statuses.Draft;
-                _unitOfWork.SaveChanges();
+                using (var db = new SchoolContext())
+                {
+                    var findMember = db.Members.Find(id);
+                    findMember.StatusId = (int)Statuses.Draft;
+                    db.Entry(findMember).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+
                 return true;
             }
             catch
@@ -85,8 +99,14 @@ namespace Service
         {
             try
             {
-                Get(id).StatusId = (int)Statuses.Removed;
-                _unitOfWork.SaveChanges();
+                using (var db = new SchoolContext())
+                {
+                    var findMember = db.Members.Find(id);
+                    findMember.StatusId = (int)Statuses.Removed;
+                    db.Entry(findMember).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+
                 return true;
             }
             catch
@@ -102,6 +122,14 @@ namespace Service
                 return db.Members.Any(m => m.Username == username && m.Password == password);
             }
         }
+
+        public Member GetLoginedMember(string username, string password)
+        {
+            using (var db = new SchoolContext())
+            {
+                return db.Members.FirstOrDefault(m => m.Username == username && m.Password == password);
+            }
+        }
     }
 
     public interface IMemberService
@@ -114,5 +142,6 @@ namespace Service
         bool Draft(int id);
         bool Remove(int id);
         bool CheckLogin(string username, string password);
+        Member GetLoginedMember(string username, string password);
     }
 }

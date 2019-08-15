@@ -2,6 +2,7 @@
 using System.Linq;
 using Data;
 using Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Service
 {
@@ -18,7 +19,7 @@ namespace Service
         {
             using (var db = new SchoolContext())
             {
-                return db.Campuses.FirstOrDefault(c => c.Id == id && c.Status.Id != (int)Statuses.Removed);
+                return db.Campuses.Include(s=>s.Status).Include(i=>i.Image).FirstOrDefault(c => c.Id == id && c.Status.Id != (int)Statuses.Removed);
             }
         }
 
@@ -34,7 +35,7 @@ namespace Service
         {
             using (var db = new SchoolContext())
             {
-                return db.Campuses.Where(c => c.Status.Id != (int)Statuses.Removed).ToList();
+                return db.Campuses.Include(s=>s.Status).Where(c => c.Status.Id != (int)Statuses.Removed).ToList();
             }
 
         }
@@ -52,7 +53,8 @@ namespace Service
             using (var db = new SchoolContext())
             {
                 db.Campuses.Add(campus);
-                _unitOfWork.SaveChanges();
+                db.SaveChanges();
+                //_unitOfWork.SaveChanges();
             }
 
             return campus.Id;
@@ -63,7 +65,8 @@ namespace Service
             using (var db = new SchoolContext())
             {
                 db.Campuses.Update(campus);
-                _unitOfWork.SaveChanges();
+                db.SaveChanges();
+                // _unitOfWork.SaveChanges();
             }
 
             return campus.Id;
@@ -73,8 +76,15 @@ namespace Service
         {
             try
             {
-                GetAdmin(id).Status.Id = (int)Statuses.Draft;
-                _unitOfWork.SaveChanges();
+               
+                using (var db = new SchoolContext())
+                {
+                    var findCampus = db.Campuses.Find(id);
+                    findCampus.StatusId = (int)Statuses.Draft;
+                    db.Entry(findCampus).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+
                 return true;
             }
             catch
@@ -87,8 +97,15 @@ namespace Service
         {
             try
             {
-                GetAdmin(id).Status.Id = (int)Statuses.Published;
-                _unitOfWork.SaveChanges();
+               
+                using (var db = new SchoolContext())
+                {
+                    var findCampus = db.Campuses.Find(id);
+                    findCampus.StatusId = (int)Statuses.Published;
+                    db.Entry(findCampus).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+
                 return true;
             }
             catch
@@ -101,8 +118,15 @@ namespace Service
         {
             try
             {
-                GetAdmin(id).Status.Id = (int)Statuses.Removed;
-                _unitOfWork.SaveChanges();
+               
+                using (var db = new SchoolContext())
+                {
+                    var findCampus = db.Campuses.Find(id);
+                    findCampus.StatusId = (int)Statuses.Removed;
+                    db.Entry(findCampus).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+
                 return true;
             }
             catch

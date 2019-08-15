@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Data;
 using Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Service
 {
@@ -19,7 +20,7 @@ namespace Service
         {
             using (var db = new SchoolContext())
             {
-                return db.Events.FirstOrDefault(e => e.Id == id && e.Status.Id != (int)Statuses.Removed);
+                return db.Events.Include(c=>c.Campus).Include(i=>i.Image).Include(s=>s.Status).FirstOrDefault(e => e.Id == id && e.Status.Id != (int)Statuses.Removed);
             }
         }
 
@@ -27,7 +28,7 @@ namespace Service
         {
             using (var db = new SchoolContext())
             {
-                return db.Events.FirstOrDefault(e => e.Slug == slug && e.Status.Id == (int)Statuses.Published);
+                return db.Events.Include(c=>c.Campus).Include(i=>i.Image).Include(s=>s.Status).FirstOrDefault(e => e.Slug == slug && e.Status.Id == (int)Statuses.Published);
             }
         }
 
@@ -35,7 +36,7 @@ namespace Service
         {
             using (var db = new SchoolContext())
             {
-                return db.Events.Where(e => e.Status.Id != (int)Statuses.Removed).ToList();
+                return db.Events.Include(c=>c.Campus).Include(i=>i.Image).Include(s=>s.Status).Where(e => e.Status.Id != (int)Statuses.Removed).ToList();
             }
         }
 
@@ -43,7 +44,7 @@ namespace Service
         {
             using (var db = new SchoolContext())
             {
-                return db.Events.Where(e => e.Status.Id == (int)Statuses.Published).ToList();
+                return db.Events.Include(c=>c.Campus).Include(i=>i.Image).Include(s=>s.Status).Where(e => e.Status.Id == (int)Statuses.Published).ToList();
             }
         }
 
@@ -82,7 +83,8 @@ namespace Service
             using (var db = new SchoolContext())
             {
                 db.Events.Add(addEvent);
-                _unitOfWork.SaveChanges();
+                db.SaveChanges();
+                // _unitOfWork.SaveChanges();
             }
 
             return addEvent.Id;
@@ -93,7 +95,8 @@ namespace Service
             using (var db = new SchoolContext())
             {
                 db.Events.Update(editEvent);
-                _unitOfWork.SaveChanges();
+                db.SaveChanges();
+                //_unitOfWork.SaveChanges();
             }
 
             return editEvent.Id;
@@ -103,8 +106,13 @@ namespace Service
         {
             try
             {
-                GetAdmin(id).Status.Id = (int)Statuses.Draft;
-                _unitOfWork.SaveChanges();
+                using (var db = new SchoolContext())
+                {
+                    var findEvent = db.Events.Find(id);
+                    findEvent.StatusId = (int)Statuses.Draft;
+                    db.Entry(findEvent).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
                 return true;
             }
             catch
@@ -118,8 +126,13 @@ namespace Service
         {
             try
             {
-                GetAdmin(id).Status.Id = (int)Statuses.Published;
-                _unitOfWork.SaveChanges();
+                using (var db = new SchoolContext())
+                {
+                    var findEvent = db.Events.Find(id);
+                    findEvent.StatusId = (int)Statuses.Published;
+                    db.Entry(findEvent).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
                 return true;
             }
             catch
@@ -132,8 +145,13 @@ namespace Service
         {
             try
             {
-                GetAdmin(id).Status.Id = (int)Statuses.Removed;
-                _unitOfWork.SaveChanges();
+                using (var db = new SchoolContext())
+                {
+                    var findEvent = db.Events.Find(id);
+                    findEvent.StatusId = (int)Statuses.Removed;
+                    db.Entry(findEvent).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
                 return true;
             }
             catch

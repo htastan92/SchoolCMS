@@ -2,6 +2,7 @@
 using System.Linq;
 using Data;
 using Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Service
 {
@@ -18,7 +19,7 @@ namespace Service
         {
             using (var db = new SchoolContext())
             {
-                return db.Forms.FirstOrDefault(f => f.Id == id);
+                return db.Forms.Include(c=>c.Campus).FirstOrDefault(f => f.Id == id);
             }
         }
 
@@ -26,7 +27,7 @@ namespace Service
         {
             using (var db = new SchoolContext())
             {
-                return db.Forms.ToList();
+                return db.Forms.Include(c=>c.Campus).ToList();
             }
         }
 
@@ -35,7 +36,7 @@ namespace Service
             using (var db = new SchoolContext())
             {
                 db.Forms.Add(form);
-                _unitOfWork.SaveChanges();
+                db.SaveChanges();
             }
 
             return form.Id;
@@ -49,7 +50,7 @@ namespace Service
                 if (form != null)
                 {
                     db.Forms.Remove(form);
-                    _unitOfWork.SaveChanges();
+                    db.SaveChanges();
                 }
             }
         }

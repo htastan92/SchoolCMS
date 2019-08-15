@@ -3,6 +3,9 @@
 @{
     ViewBag.Title = "Menüler";
 }
+    <p>
+        @Html.ActionLink("Yeni Menü", "New", "Menu", null, new { @class = "btn btn-primary" })
+    </p>
 <table class="table table-bordered" id="dataTable">
     <thead>
         <tr>
@@ -26,10 +29,10 @@
                 <td>@x.ParentMenu.Name</td>
                 <td>@x.Status.Name</td>
                 <td>
-                    <a href="@Url.Action("Edit", "Event", new {id = @x.Id})" class="btn btn-success">Düzenle</a>
-                    <a href="@Url.Action("Remove", "Event", new {id = @x.Id})" class="btn btn-danger">Sil</a>
-                    <a href="@Url.Action("Draft", "Event", new {id = @x.Id})" class="btn btn-warning">Taslak Yap</a>
-                    <a href="@Url.Action("Publish", "Event", new {id = @x.Id})" class="btn btn-info">Yayınla</a>
+                    <a href="@Url.Action("Edit", "Menu", new {id = @x.Id})" class="btn btn-success">Düzenle</a>
+                    <a href="@Url.Action("Remove", "Menu", new {id = @x.Id})" class="btn btn-danger">Sil</a>
+                    <a href="@Url.Action("Draft", "Menu", new {id = @x.Id})" class="btn btn-warning">Taslak Yap</a>
+                    <a href="@Url.Action("Publish", "Menu", new {id = @x.Id})" class="btn btn-info">Yayınla</a>
                 </td>
             </tr>
         }

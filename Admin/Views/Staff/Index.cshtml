@@ -1,6 +1,6 @@
 ﻿@model Admin.Models.StaffListViewModel
 <p>
-    @Html.ActionLink("Yeni Kampüs", "New", "Campus", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Yeni Eğitmen", "New", "Staff", null, new { @class = "btn btn-primary" })
 </p>
 @{
     ViewBag.Title = "Eğitmenler";
@@ -18,20 +18,20 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var campus in Model.Staff)
+        @foreach (var staff in Model.Staff)
         {
             <tr>
-                <td>@campus.Id</td>
-                <td>@campus.FullName</td>
-                <td>@campus.Sector</td>
-                <td>@campus.BioText</td>
-                <td>@campus.Status.Name</td>
-                <td>@campus.Campus.Name</td>
+                <td>@staff.Id</td>
+                <td>@staff.FullName</td>
+                <td>@staff.Sector</td>
+                <td>@staff.BioText</td>
+                <td>@staff.Status.Name</td>
+                <td>@staff.Campus.Name</td>
                 <td>
-                    <a href="@Url.Action("Edit", new {id = campus.Id})" class="btn btn-success btn-sm">Düzenle</a>
-                    <a href="@Url.Action("Draft", new {id = campus.Id})" class="btn btn-warning btn-sm">Taslak</a>
-                    <a href="@Url.Action("Publish", new {id = campus.Id})" class="btn btn-info btn-sm">Yayınla</a>
-                    <a href="@Url.Action("Remove", new {id = campus.Id})" class="btn btn-danger btn-sm" onclick="return confirm('Bu kaydı silmek istediğinize emin misiniz?');">Sil</a>
+                    <a href="@Url.Action("Edit", new {id = staff.Id})" class="btn btn-success btn-sm">Düzenle</a>
+                    <a href="@Url.Action("Draft", new {id = staff.Id})" class="btn btn-warning btn-sm">Taslak</a>
+                    <a href="@Url.Action("Publish", new {id = staff.Id})" class="btn btn-info btn-sm">Yayınla</a>
+                    <a href="@Url.Action("Remove", new {id = staff.Id})" class="btn btn-danger btn-sm" onclick="return confirm('Bu kaydı silmek istediğinize emin misiniz?');">Sil</a>
                 </td>
             </tr>
         }

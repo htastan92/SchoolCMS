@@ -15,7 +15,7 @@ namespace Admin.Helper
             IEnumerable<Status> statuses;
             using (SchoolContext db = new SchoolContext())
             {
-                statuses = db.Statuses.ToList();
+                statuses = db.Statuses.Where(s=>s.Id!=(int)Statuses.Removed).ToList();
             }
 
             SelectList statuList = new SelectList(statuses, "Id", "Name");

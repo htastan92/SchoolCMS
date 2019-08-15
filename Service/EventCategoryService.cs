@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Service
 {
@@ -18,7 +19,7 @@ namespace Service
         {
             using (var db = new SchoolContext())
             {
-                return db.EventCategories.FirstOrDefault(e => e.Id == id && e.Status.Id != (int)Statuses.Removed);
+                return db.EventCategories.Include(s=>s.Status).FirstOrDefault(e => e.Id == id && e.Status.Id != (int)Statuses.Removed);
             }
         }
 
@@ -26,7 +27,7 @@ namespace Service
         {
             using (var db = new SchoolContext())
             {
-                return db.EventCategories.Where(e => e.Status.Id != (int)Statuses.Removed).ToList();
+                return db.EventCategories.Include(s=>s.Status).Where(e => e.Status.Id != (int)Statuses.Removed).ToList();
             }
         }
 
@@ -35,8 +36,8 @@ namespace Service
             using (var db = new SchoolContext())
             {
                 db.EventCategories.Add(addEventCategory);
-                //db.SaveChanges();
-                _unitOfWork.SaveChanges();
+                db.SaveChanges();
+               // _unitOfWork.SaveChanges();
             }
 
             return addEventCategory.Id;
@@ -47,7 +48,7 @@ namespace Service
             using (var db = new SchoolContext())
             {
                 db.EventCategories.Update(editEventCategory);
-                _unitOfWork.SaveChanges();
+                db.SaveChanges();
             }
 
             return editEventCategory.Id;
@@ -57,8 +58,14 @@ namespace Service
         {
             try
             {
-                Get(id).Status.Id = (int)Statuses.Draft;
-                _unitOfWork.SaveChanges();
+                using (var db = new SchoolContext())
+                {
+                    var findEventCategory = db.EventCategories.Find(id);
+                    findEventCategory.StatusId = (int)Statuses.Draft;
+                    db.Entry(findEventCategory).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+
                 return true;
             }
             catch
@@ -72,8 +79,14 @@ namespace Service
         {
             try
             {
-                Get(id).Status.Id = (int)Statuses.Published;
-                _unitOfWork.SaveChanges();
+                using (var db = new SchoolContext())
+                {
+                    var findEventCategory = db.EventCategories.Find(id);
+                    findEventCategory.StatusId = (int)Statuses.Published;
+                    db.Entry(findEventCategory).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+
                 return true;
             }
             catch
@@ -86,8 +99,14 @@ namespace Service
         {
             try
             {
-                Get(id).Status.Id = (int)Statuses.Removed;
-                _unitOfWork.SaveChanges();
+                using (var db = new SchoolContext())
+                {
+                    var findEventCategory = db.EventCategories.Find(id);
+                    findEventCategory.StatusId = (int)Statuses.Removed;
+                    db.Entry(findEventCategory).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+
                 return true;
             }
             catch

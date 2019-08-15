@@ -70,7 +70,8 @@ namespace Service
             using (var db = new SchoolContext())
             {
                 db.Staff.Update(staff);
-                _unitOfWork.SaveChanges();
+                db.SaveChanges();
+               // _unitOfWork.SaveChanges();
             }
 
             return staff.Id;
@@ -80,8 +81,14 @@ namespace Service
         {
             try
             {
-                GetAdmin(id).Status.Id = (int)Statuses.Published;
-                _unitOfWork.SaveChanges();
+                using (var db = new SchoolContext())
+                {
+                    var findsStaff = db.Staff.Find(id);
+                    findsStaff.StatusId = (int)Statuses.Published;
+                    db.Entry(findsStaff).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+
                 return true;
             }
             catch
@@ -94,8 +101,14 @@ namespace Service
         {
             try
             {
-                GetAdmin(id).Status.Id = (int)Statuses.Draft;
-                _unitOfWork.SaveChanges();
+                using (var db = new SchoolContext())
+                {
+                    var findsStaff = db.Staff.Find(id);
+                    findsStaff.StatusId = (int)Statuses.Draft;
+                    db.Entry(findsStaff).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+
                 return true;
             }
             catch
@@ -108,8 +121,14 @@ namespace Service
         {
             try
             {
-                GetAdmin(id).Status.Id = (int)Statuses.Removed;
-                _unitOfWork.SaveChanges();
+                using (var db = new SchoolContext())
+                {
+                    var findsStaff = db.Staff.Find(id);
+                    findsStaff.StatusId = (int)Statuses.Removed;
+                    db.Entry(findsStaff).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+
                 return true;
             }
             catch

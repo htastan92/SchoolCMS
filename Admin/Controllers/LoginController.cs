@@ -1,4 +1,5 @@
 ﻿using Admin.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Service;
 
@@ -26,7 +27,9 @@ namespace Admin.Controllers
 
             if (_memberService.CheckLogin(viewModel.Username, viewModel.Password))
             {
-                // Create Session
+                var findUser = _memberService.GetLoginedMember(viewModel.Username, viewModel.Password);
+                if (findUser == null) return RedirectToAction("Index");
+                HttpContext.Session.SetInt32("userId", findUser.Id);
                 return RedirectToAction("Index", "Dashboard");
             }
 

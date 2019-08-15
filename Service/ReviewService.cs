@@ -2,6 +2,7 @@
 using System.Linq;
 using Data;
 using Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Service
 {
@@ -51,7 +52,7 @@ namespace Service
             using (var db = new SchoolContext())
             {
                 db.Reviews.Add(review);
-                _unitOfWork.SaveChanges();
+                db.SaveChanges();
             }
 
             return review.Id;
@@ -62,7 +63,7 @@ namespace Service
             using (var db = new SchoolContext())
             {
                 db.Reviews.Update(review);
-                _unitOfWork.SaveChanges();
+                db.SaveChanges();
             }
 
             return review.Id;
@@ -71,8 +72,14 @@ namespace Service
         {
             try
             {
-                GetAdmin(id).Status.Id = (int)Statuses.Published;
-                _unitOfWork.SaveChanges();
+                using (var db = new SchoolContext())
+                {
+                    var findReview = db.Reviews.Find(id);
+                    findReview.StatusId = (int)Statuses.Published;
+                    db.Entry(findReview).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+
                 return true;
             }
             catch
@@ -85,8 +92,14 @@ namespace Service
         {
             try
             {
-                GetAdmin(id).Status.Id = (int)Statuses.Draft;
-                _unitOfWork.SaveChanges();
+                using (var db = new SchoolContext())
+                {
+                    var findReview = db.Reviews.Find(id);
+                    findReview.StatusId = (int)Statuses.Draft;
+                    db.Entry(findReview).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+
                 return true;
             }
             catch
@@ -100,8 +113,14 @@ namespace Service
         {
             try
             {
-                GetAdmin(id).Status.Id = (int)Statuses.Removed;
-                _unitOfWork.SaveChanges();
+                using (var db = new SchoolContext())
+                {
+                    var findReview = db.Reviews.Find(id);
+                    findReview.StatusId = (int)Statuses.Removed;
+                    db.Entry(findReview).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+
                 return true;
             }
             catch

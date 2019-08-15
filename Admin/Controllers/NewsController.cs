@@ -1,10 +1,12 @@
-﻿using Admin.Models;
+﻿using Admin.Helper;
+using Admin.Models;
 using Entities;
 using Microsoft.AspNetCore.Mvc;
 using Service;
 
 namespace Admin.Controllers
 {
+    [SessionFilter]
     public class NewsController : Controller
     {
         private readonly INewsService _newsService;
@@ -40,8 +42,8 @@ namespace Admin.Controllers
                 Description = viewModel.Description,
                 EditorContent = viewModel.EditorContent,
                 Slug = viewModel.Slug,
-                Image = null,
-                Status = null
+                ImageId = viewModel.ImageId,
+                StatusId = viewModel.StatusId
             };
             _newsService.New(newNews);
             return RedirectToAction("Index");
@@ -62,8 +64,8 @@ namespace Admin.Controllers
                  Description = findNews.Description,
                  EditorContent = findNews.EditorContent,
                  Slug = findNews.Slug,
-                 ImageId = 1,
-                 StatusId = 1
+                 ImageId = findNews.ImageId,
+                 StatusId = findNews.StatusId
             };
             return View(viewModel);
         }
@@ -81,8 +83,8 @@ namespace Admin.Controllers
                 Description = viewModel.Description,
                 Slug = viewModel.Slug,
                 EditorContent = viewModel.EditorContent,
-                Image = null,
-                Status = null
+                ImageId = viewModel.ImageId,
+                StatusId = viewModel.StatusId
             };
             _newsService.Edit(editedNews);
             return RedirectToAction("Index");

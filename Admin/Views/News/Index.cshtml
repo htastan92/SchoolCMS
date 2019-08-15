@@ -3,6 +3,9 @@
 @{
     ViewBag.Title = "Haberler";
 }
+    <p>
+        @Html.ActionLink("Yeni Haber", "New", "News", null, new { @class = "btn btn-primary" })
+    </p>
 <table class="table table-bordered" id="dataTable">
     <thead>
         <tr>

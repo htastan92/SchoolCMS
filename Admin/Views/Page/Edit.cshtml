@@ -33,7 +33,7 @@
         <div class="form-group">
             @Html.DisplayNameFor(model => model.EditorContent)
             <div class="col-md-10">
-                @Html.EditorFor(model => model.EditorContent, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextAreaFor(model => model.EditorContent, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.EditorContent, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -62,3 +62,8 @@
     </div>
 }
 
+
+@section Javascript
+{
+    <script src="@Url.Content("~/Assets/libs/ckeditor/ckeditor.js")"></script>
+}

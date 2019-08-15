@@ -1,8 +1,10 @@
-﻿using Admin.Models;
+﻿using Admin.Helper;
+using Admin.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Admin.Controllers
 {
+    [SessionFilter]
     public class PageController : Controller
     {
         public IActionResult Index()

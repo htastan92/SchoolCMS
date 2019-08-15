@@ -1,9 +1,11 @@
-﻿using Admin.Models;
+﻿using Admin.Helper;
+using Admin.Models;
 using Microsoft.AspNetCore.Mvc;
 using Service;
 
 namespace Admin.Controllers
 {
+    [SessionFilter]
     public class DashboardController : Controller
     {
         private readonly IDashboardService _dashboardService;

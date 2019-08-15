@@ -2,6 +2,7 @@
 using System.Linq;
 using Data;
 using Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Service
 {
@@ -79,7 +80,7 @@ namespace Service
             using (var db = new SchoolContext())
             {
                 db.News.Add(news);
-                _unitOfWork.SaveChanges();
+                db.SaveChanges();
             }
 
             return news.Id;
@@ -90,7 +91,7 @@ namespace Service
             using (var db = new SchoolContext())
             {
                 db.News.Update(news);
-                _unitOfWork.SaveChanges();
+                db.SaveChanges();
             }
 
             return news.Id;
@@ -100,8 +101,14 @@ namespace Service
         {
             try
             {
-                GetAdmin(id).Status.Id = (int)Statuses.Published;
-                _unitOfWork.SaveChanges();
+                using (var db = new SchoolContext())
+                {
+                    var findNews = db.News.Find(id);
+                    findNews.StatusId = (int)Statuses.Published;
+                    db.Entry(findNews).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+
                 return true;
             }
             catch
@@ -114,8 +121,14 @@ namespace Service
         {
             try
             {
-                GetAdmin(id).Status.Id = (int)Statuses.Draft;
-                _unitOfWork.SaveChanges();
+                using (var db = new SchoolContext())
+                {
+                    var findNews = db.News.Find(id);
+                    findNews.StatusId = (int)Statuses.Draft;
+                    db.Entry(findNews).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+
                 return true;
             }
             catch
@@ -128,8 +141,14 @@ namespace Service
         {
             try
             {
-                GetAdmin(id).Status.Id = (int)Statuses.Removed;
-                _unitOfWork.SaveChanges();
+                using (var db = new SchoolContext())
+                {
+                    var findNews = db.News.Find(id);
+                    findNews.StatusId = (int)Statuses.Removed;
+                    db.Entry(findNews).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+
                 return true;
             }
             catch

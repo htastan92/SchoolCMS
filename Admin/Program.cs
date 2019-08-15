@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore;
+﻿using System;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
 namespace Admin
@@ -12,6 +13,11 @@ namespace Admin
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .UseKestrel(options =>
+                {
+                    options.Limits.KeepAliveTimeout = TimeSpan.FromMinutes(35);
+                    options.Limits.RequestHeadersTimeout = TimeSpan.FromMinutes(35);
+                })
                 .UseStartup<Startup>();
     }
 }

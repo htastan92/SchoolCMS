@@ -1,10 +1,13 @@
-﻿using Admin.Models;
+﻿using System;
+using Admin.Helper;
+using Admin.Models;
 using Entities;
 using Microsoft.AspNetCore.Mvc;
 using Service;
 
 namespace Admin.Controllers
 {
+    [SessionFilter]
     public class CampusController : Controller
     {
         private readonly ICampusService _campusService;
@@ -44,10 +47,13 @@ namespace Admin.Controllers
                 Address = viewModel.Address,
                 Telephone = viewModel.Telephone,
                 EmailAddress = viewModel.EmailAddress,
-                Fax = viewModel.Fax
-
+                Fax = viewModel.Fax,
+                CreationDate = DateTime.Now,
+                CreatorMemberId = 1,
+                EditDate = null,
+                EditorMemberId = null
             };
-           _campusService.New(newCampus);
+            _campusService.New(newCampus);
             return RedirectToAction("Index");
         }
 
@@ -94,7 +100,9 @@ namespace Admin.Controllers
                 Address = viewModel.Address,
                 Telephone = viewModel.Telephone,
                 EmailAddress = viewModel.EmailAddress,
-                Fax = viewModel.Fax
+                Fax = viewModel.Fax,
+                EditDate = DateTime.Now,
+                EditorMemberId = 1
             };
 
             _campusService.Edit(editedcampus);

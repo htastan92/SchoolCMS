@@ -115,7 +115,7 @@
                         </div>
                         <div class="blog-content">
                             <div class="blog-top">
-                                <p>@news.CreationDate.ToString("dd MMMM yyyy")</p>
+                                <p>@news.CreationDate?.ToString("dd MMMM yyyy")</p>
                             </div>
                             <div class="blog-bottom">
                                 <h2><a href="blog-details.html">@news.Description.Substring(0, 40)... </a></h2>

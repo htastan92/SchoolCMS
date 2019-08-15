@@ -14,6 +14,7 @@ namespace Admin.Models
         public string Sector { get; set; }
 
         [Display(Name = "Eğitmen Hakkında")]
+        [DataType(DataType.MultilineText)]
         public string BioText { get; set; }
 
         [Display(Name = "Durum")]

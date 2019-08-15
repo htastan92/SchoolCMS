@@ -1,8 +1,10 @@
-﻿using Admin.Models;
+﻿using Admin.Helper;
+using Admin.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Admin.Controllers
 {
+    [SessionFilter]
     public class AccountController : Controller
     {
         public IActionResult Index()
@@ -23,7 +25,8 @@ namespace Admin.Controllers
 
         public IActionResult Logout()
         {
-            // Kill session and remove session from database.
+            HttpContext.Session.Clear();
+            HttpContext.Session.Remove("userId");
             return RedirectToAction("Index", "Login");
         }
     }

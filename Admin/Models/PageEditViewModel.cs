@@ -18,7 +18,6 @@ namespace Admin.Models
         public string Slug { get; set; }
 
         [Display(Name = "Açıklama")]
-        [DataType(DataType.MultilineText)]
         [MaxLength(120)]
         public string Description { get; set; }
 

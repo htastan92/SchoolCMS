@@ -1,10 +1,12 @@
-﻿using Admin.Models;
+﻿using Admin.Helper;
+using Admin.Models;
 using Entities;
 using Microsoft.AspNetCore.Mvc;
 using Service;
 
 namespace Admin.Controllers
 {
+    [SessionFilter]
     public class SettingsController : Controller
     {
         private readonly ISettingsService _settingsService;
