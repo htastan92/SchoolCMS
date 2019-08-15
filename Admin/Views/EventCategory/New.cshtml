@@ -20,7 +20,7 @@
         <div class="form-group">
             @Html.DisplayNameFor(model => model.StatusId)
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.StatusId, SelectListHelper.campusSelectList(), htmlAttributes: new { @class = "form-control"})
+                @Html.DropDownListFor(model => model.StatusId, SelectListHelper.StatusSelectList(), htmlAttributes: new { @class = "form-control"})
                 @Html.ValidationMessageFor(model => model.StatusId, "", new { @class = "text-danger" })
             </div>
         </div>

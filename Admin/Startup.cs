@@ -36,7 +36,7 @@ namespace Admin
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddSingleton<SchoolContext,SchoolContext>();
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddSingleton<IUnitOfWork, UnitOfWork>();
             services.AddScoped<ICampusService, CampusService>();
             services.AddScoped<IDashboardService, DashboardService>();
             services.AddScoped<IEventCategoryService, EventCategoryService>();

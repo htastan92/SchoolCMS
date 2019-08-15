@@ -2,6 +2,7 @@
 using System.Linq;
 using Data;
 using Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Service
 {
@@ -35,6 +36,8 @@ namespace Service
             using (var db = new SchoolContext())
             {
                 return db.Staff
+                    .Include(s => s.Status)
+                    .Include(s => s.Campus)
                     .Where(s => s.Status.Id != (int)Statuses.Removed)
                     .ToList();
             }
@@ -55,7 +58,8 @@ namespace Service
             using (var db = new SchoolContext())
             {
                 db.Staff.Add(staff);
-                _unitOfWork.SaveChanges();
+                db.SaveChanges();
+                //_unitOfWork.SaveChanges();
             }
 
             return staff.Id;

@@ -33,15 +33,15 @@
         </button>
 
 
-   
-       @Html.Partial("NavBarPartial")
+
+        @Html.Partial("NavBarPartial")
 
     </nav>
 
     <div id="wrapper">
 
         <!-- Sidebar -->
-       @Html.Partial("SideBarPartial")
+        @Html.Partial("SideBarPartial")
 
         <div id="content-wrapper">
 
@@ -56,10 +56,10 @@
                 </ol>
 
                 <!-- Icon Cards-->
-               
-                
+
+
                 @RenderBody()
-               
+
             </div>
             <!-- /.container-fluid -->
             <!-- Sticky Footer -->
@@ -100,25 +100,14 @@
         </div>
     </div>
 
-    <!-- Bootstrap core JavaScript-->
+
     <script src="@Url.Content("~/Assets/vendor/jquery/jquery.min.js")"></script>
     <script src="@Url.Content("~/Assets/vendor/bootstrap/js/bootstrap.bundle.min.js")"></script>
-
-    <!-- Core plugin JavaScript-->
     <script src="@Url.Content("~/Assets/vendor/jquery-easing/jquery.easing.min.js")"></script>
-
-    <!-- Page level plugin JavaScript-->
-    <script src="@Url.Content("~/Assets/vendor/chart.js/Chart.min.js")"></script>
-    <script src="@Url.Content("~/Assets/vendor/datatables/jquery.dataTables.js")"></script>
-    <script src="@Url.Content("~/Assets/vendor/datatables/dataTables.bootstrap4.js")"></script>
-
-    <!-- Custom scripts for all pages-->
     <script src=@Url.Content("~/Assets/js/sb-admin.min.js")></script>
+    <script src="@Url.Content("~/Assets/js/admin.min.js")"></script>
 
-    <!-- Demo scripts for this page-->
-    <script src="@Url.Content("~/Assets/js/demo/datatables-demo.js")"></script>
-    <script src="@Url.Content("~/Assets/js/demo/chart-area-demo.js")"></script>
-
+    @RenderSection("Javascript", false)
 </body>
-    
+
 </html>

@@ -6,7 +6,7 @@
 
         public UnitOfWork(SchoolContext schoolContext)
         {
-            _schoolContext = schoolContext;
+            this._schoolContext = schoolContext;
         }
 
         public void SaveChanges()

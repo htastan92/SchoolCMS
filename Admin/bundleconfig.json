@@ -1,0 +1,8 @@
+[
+  {
+    "outputFileName": "wwwroot/Assets/js/admin.min.js",
+    "inputFiles": [
+      "wwwroot/Assets/js/admin.js"
+    ]
+  }
+]

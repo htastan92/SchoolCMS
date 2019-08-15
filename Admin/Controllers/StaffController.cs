@@ -38,8 +38,8 @@ namespace Admin.Controllers
                 FullName = viewModel.FullName,
                 BioText = viewModel.BioText,
                 Sector = viewModel.Sector,
-                Campus = null,
-                Status = null
+                CampusId = viewModel.CampusId,
+                StatusId = viewModel.StatusId
             };
             _staffService.New(newStaff);
             return RedirectToAction("Index");
@@ -51,7 +51,7 @@ namespace Admin.Controllers
                 return RedirectToAction("Index");
             var findStaff = _staffService.GetAdmin(id);
 
-            StaffEditViewModel viewModel= new StaffEditViewModel()
+            StaffEditViewModel viewModel = new StaffEditViewModel()
             {
                 Id = findStaff.Id,
                 FullName = findStaff.FullName,

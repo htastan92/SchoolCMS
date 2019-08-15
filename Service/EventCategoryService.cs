@@ -35,6 +35,7 @@ namespace Service
             using (var db = new SchoolContext())
             {
                 db.EventCategories.Add(addEventCategory);
+                //db.SaveChanges();
                 _unitOfWork.SaveChanges();
             }
 
