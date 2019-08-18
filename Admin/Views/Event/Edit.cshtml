@@ -105,9 +105,10 @@
 @section Javascript
 {
     <script src="@Url.Content("~/Assets/libs/ckeditor/ckeditor.js")"></script>
-}
-@section Javascript
-{
-    <script src="@Url.Content("~/Assets/libs/ckeditor/ckeditor.js")"></script>
-
+    <script>
+        $('.datepicker').datepicker({
+            format: 'mm/dd/yyyy',
+            startDate: '-3d'
+        });
+    </script>
 }

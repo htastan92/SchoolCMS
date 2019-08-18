@@ -22,6 +22,13 @@ namespace Service
                 return db.Members.FirstOrDefault(m => m.Id == id && m.StatusId == (int)Statuses.Published);
             }
         }
+        public Member Get(string oldPassword)
+        {
+            using (var db = new SchoolContext())
+            {
+                return db.Members.FirstOrDefault(m => m.Password == oldPassword && m.StatusId == (int)Statuses.Published);
+            }
+        }
 
         public IList<Member> GetAll()
         {
@@ -130,11 +137,44 @@ namespace Service
                 return db.Members.FirstOrDefault(m => m.Username == username && m.Password == password);
             }
         }
+
+        public bool ChangePassword(string oldPassword,string newPassword,int memberId)
+        {
+            try
+            {
+                using (var db = new SchoolContext())
+                {
+                    var findMember = Get(memberId);
+                    if (findMember!=null)
+                    {
+                        if (findMember.Password!=oldPassword)
+                        {
+                            return false;
+                        }
+                        else
+                        {
+                            findMember.Password = newPassword;
+                            db.Entry(findMember).State = EntityState.Modified;
+                            db.SaveChanges();
+                            return true;
+                        }
+
+                    }
+                }
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 
     public interface IMemberService
     {
         Member Get(int id);
+        Member Get(string oldPassword);
         IList<Member> GetAll();
         int New(Member member);
         int Edit(Member member);
@@ -143,5 +183,6 @@ namespace Service
         bool Remove(int id);
         bool CheckLogin(string username, string password);
         Member GetLoginedMember(string username, string password);
+        bool ChangePassword(string oldPassword, string newPassword,int memberId);
     }
 }
