@@ -7,7 +7,7 @@
         public string SubTitle { get; set; }
         public string Url { get; set; }
 
-        public int ImageId { get; set; }
+        public int? ImageId { get; set; }
         public Image Image { get; set; }
 
         public int StatusId { get; set; }

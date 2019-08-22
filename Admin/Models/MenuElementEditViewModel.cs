@@ -12,7 +12,7 @@ namespace Admin.Models
         [Display(Name = "Menü Konumu")]
         public int MenuLocation { get; set; }
         [Display(Name = "Üst Menü Adı")]
-        public int ParentMenuId { get; set; }
+        public int? ParentMenuId { get; set; }
         [Display(Name = "Durum")]
         public int StatusId { get; set; }
      

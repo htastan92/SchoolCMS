@@ -26,7 +26,7 @@
                 <td>@x.Name</td>
                 <td>@x.Url</td>
                 <td>@x.MenuLocation</td>
-                <td>@x.ParentMenu.Name</td>
+                <td>@x.ParentMenu?.Name</td>
                 <td>@x.Status.Name</td>
                 <td>
                     <a href="@Url.Action("Edit", "Menu", new {id = @x.Id})" class="btn btn-success">Düzenle</a>

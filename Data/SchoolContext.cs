@@ -8,9 +8,8 @@ namespace Data
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=94.73.170.20;Database=u7801466_dbTestx;User Id=u7801466_userE86;Password=IDyk81F0;");
+            optionsBuilder.UseSqlServer("Server=;Database=SchoolCmsDb;User Id=sa;Password=Wissen2018");
         }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // News <=> News Category
@@ -54,6 +53,10 @@ namespace Data
 
             modelBuilder.Entity<Image>().HasData(
                 new Image { Id = 1, Url = "babosko.jpg" }
+            );
+
+            modelBuilder.Entity<MenuElement>().HasData(
+                new MenuElement{Id = 1, Name = "Header",StatusId = 1}
             );
 
             #endregion

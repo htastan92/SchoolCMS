@@ -56,7 +56,7 @@ namespace Admin
 
             services.AddDistributedSqlServerCache(o =>
             {
-                o.ConnectionString = "Server=94.73.170.20;Database=u7801466_dbTestx;User Id=u7801466_userE86;Password=IDyk81F0;";
+                o.ConnectionString = "Server=;Database=SchoolCmsDb;User Id=sa;Password=Wissen2018;";
                 o.SchemaName = "dbo";
                 o.TableName = "Sessions";
             });
