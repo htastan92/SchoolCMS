@@ -6,13 +6,6 @@ namespace Service
 {
     public class SettingsService : ISettingsService
     {
-        private readonly IUnitOfWork _unitOfWork;
-
-        public SettingsService(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
-
         public Settings Get()
         {
             using (var db = new SchoolContext())

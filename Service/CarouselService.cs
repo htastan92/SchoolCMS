@@ -9,12 +9,6 @@ namespace Service
 {
     public class CarouselService : ICarouselService
     {
-        private readonly IUnitOfWork _unitOfWork;
-
-        public CarouselService(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
 
         public Carousel GetAdmin(int id)
         {

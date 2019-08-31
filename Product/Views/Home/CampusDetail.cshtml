@@ -1,5 +1,64 @@
 ﻿@model CampusDetailViewModel
 
-@{
-    ViewData["Title"] = Model.Name;
-}
+ 
+    <!-- Banner Area Start -->
+    <div class="banner-area-wrapper">
+        <div class="banner-area text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="banner-content-wrapper">
+                            <div class="banner-content">
+                                <h2>@Model?.Name</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Banner Area End -->
+    <!-- Blog Start -->
+    <div class="courses-details-area blog-area pt-150 pb-140">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="courses-details">
+                        <div class="courses-details-img">
+                            <img src="@Model?.ImageUrl" alt="courses-details">
+                        </div>
+                        <div class="course-details-content">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="blog-sidebar right">
+                        <div class="single-blog-widget mb-50">
+                            <h3>search</h3>
+                            <div class="blog-search">
+                                <form id="search" action="#">
+                                    <input type="search" placeholder="Search..." name="search" />
+                                    <button type="submit">
+                                        <span><i class="fa fa-search"></i></span>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="single-blog-widget mb-50">
+                            <h3>Son Haberler</h3>
+                            @foreach (var item in Model.News)
+                            {
+                                <ul>
+                                    <li><a href="@Url.Action("NewsDetail", new {newsSlug = item.Slug})">@item.Name</a></li>
+                                </ul>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Blog End -->
+   

@@ -135,5 +135,7 @@ namespace Admin.Controllers
             _campusService.Remove(id);
             return RedirectToAction("Index");
         }
+
+
     }
 }

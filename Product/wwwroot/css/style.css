@@ -531,7 +531,7 @@ textarea {
 /*----------------------------------------*/
 .logo a {display: inline-block}
 .logo{
-    padding: 60px 0 23px;
+    padding: 60px 50px 23px;
 /*    width: 60%;*/
     -webkit-transition: all 0.5s ease 0s;
     -o-transition: all 0.5s ease 0s;

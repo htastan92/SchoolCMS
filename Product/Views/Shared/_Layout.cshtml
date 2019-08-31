@@ -32,13 +32,13 @@
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <partial name="HeaderPartial" />
+@await Component.InvokeAsync("Header")
+@RenderBody()
 
-    @RenderBody()
 
-    <partial name="FooterPartial" />
+@await Component.InvokeAsync("Footer")
 
-    <script src="@Url.Content("~/js/vendor/jquery-1.12.0.min.js")"></script>
+<script src="@Url.Content("~/js/vendor/jquery-1.12.0.min.js")"></script>
     <script src="@Url.Content("~/js/bootstrap.min.js")"></script>
     <script src="@Url.Content("~/js/jquery.meanmenu.js")"></script>
     <script src="@Url.Content("~/js/jquery.magnific-popup.js")"></script>

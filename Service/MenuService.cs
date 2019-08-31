@@ -6,20 +6,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Service
 {
-    public class MenuService :IMenuService
+    public class MenuService : IMenuService
     {
-        private readonly IUnitOfWork _unitOfWork;
-
-        public MenuService(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
-
         public MenuElement GetAdmin(int? id)
         {
             using (var db = new SchoolContext())
             {
-                return db.MenuElements.Include(s=>s.Status).Include(pm=>pm.ParentMenu).FirstOrDefault(m => m.Id == id && m.Status.Id != (int)Statuses.Removed);
+                return db.MenuElements.Include(s => s.Status).Include(pm => pm.ParentMenu).FirstOrDefault(m => m.Id == id && m.Status.Id != (int)Statuses.Removed);
             }
         }
 
@@ -27,7 +20,7 @@ namespace Service
         {
             using (var db = new SchoolContext())
             {
-                return db.MenuElements.Include(s=>s.Status).Include(pm=>pm.ParentMenu).FirstOrDefault(m => m.Id == id && m.Status.Id == (int)Statuses.Published);
+                return db.MenuElements.Include(s => s.Status).Include(pm => pm.ParentMenu).FirstOrDefault(m => m.Id == id && m.Status.Id == (int)Statuses.Published);
             }
         }
 
@@ -35,7 +28,7 @@ namespace Service
         {
             using (var db = new SchoolContext())
             {
-                return db.MenuElements.Include(p=>p.ParentMenu).Include(s=>s.Status)
+                return db.MenuElements.Include(p => p.ParentMenu).Include(s => s.Status)
                     .Where(m => m.Status.Id != (int)Statuses.Removed)
                     .ToList();
             }
@@ -45,7 +38,7 @@ namespace Service
         {
             using (var db = new SchoolContext())
             {
-                return db.MenuElements.Include(s=>s.Status).Include(pm=>pm.ParentMenu)
+                return db.MenuElements.Include(s => s.Status).Include(pm => pm.ParentMenu)
                     .Where(m => m.Status.Id == (int)Statuses.Published)
                     .ToList();
             }
@@ -55,7 +48,7 @@ namespace Service
         {
             using (var db = new SchoolContext())
             {
-                return db.MenuElements.Include(s=>s.Status).Include(pm=>pm.ParentMenu)
+                return db.MenuElements.Include(s => s.Status).Include(pm => pm.ParentMenu)
                     .Where(m => m.MenuLocation == (int)MenuLocations.Header && m.Status.Id == (int)Statuses.Published)
                     .ToList();
             }
@@ -65,7 +58,7 @@ namespace Service
         {
             using (var db = new SchoolContext())
             {
-                return db.MenuElements.Include(s=>s.Status).Include(pm=>pm.ParentMenu)
+                return db.MenuElements.Include(s => s.Status).Include(pm => pm.ParentMenu)
                     .Where(m => m.MenuLocation == (int)MenuLocations.Footer && m.Status.Id == (int)Statuses.Published)
                     .ToList();
             }

@@ -44,6 +44,7 @@ namespace Product.Controllers
             return View(viewModel);
         }
 
+
         [Route("404")]
         public IActionResult Error()
         {
@@ -77,7 +78,7 @@ namespace Product.Controllers
                 ImageUrl = findCampus.Image.Url,
                 Telephone = findCampus.Telephone,
                 Events = findCampus.Events.ToList(),
-                News = findCampus.News.ToList(),
+                News = findCampus.News.OrderByDescending(n => n.CreationDate).Take(5).ToList(),
                 Staff = findCampus.Staff.ToList()
             };
 
