@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -16,10 +17,11 @@ namespace Product.Controllers
         private readonly IMenuService _menuService;
         private readonly ICarouselService _carouselService;
         private readonly IReviewService _reviewService;
+        private readonly IFormService _formService;
 
         public HomeController(INewsService newsService, IEventService eventService,
             IPageService pageService, ICampusService campusService, IMenuService menuService,
-            ICarouselService carouselService, IReviewService reviewService)
+            ICarouselService carouselService, IReviewService reviewService,IFormService formService)
         {
             _newsService = newsService;
             _eventService = eventService;
@@ -28,6 +30,7 @@ namespace Product.Controllers
             _menuService = menuService;
             _carouselService = carouselService;
             _reviewService = reviewService;
+            _formService = formService;
         }
 
         [Route("")]
@@ -183,14 +186,27 @@ namespace Product.Controllers
         [Route("iletisim")]
         public IActionResult Contact()
         {
-            ContactViewModel viewModel = new ContactViewModel
-            {
-
-            };
-
-            return View(viewModel);
+            return View();
         }
 
+        [HttpPost]
+        public IActionResult Contact(ContactViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+                return View(viewModel);
+
+            var newForm = new Form()
+            {
+                ParentFullName = viewModel.ParentFullName,
+                StudentFullName = viewModel.StudentFullName,
+                EmailAddress = viewModel.EmailAddress,
+                TelephoneNumber = viewModel.TelephoneNumber,
+                CampusId = viewModel.CampusId,
+                SentDate = DateTime.Now
+            };
+            _formService.New(newForm);
+            return RedirectToAction("Index");
+        }
         public PartialViewResult HeaderPartial()
         {
             HeaderPartialViewModel viewModel = new HeaderPartialViewModel

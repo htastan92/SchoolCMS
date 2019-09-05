@@ -41,6 +41,7 @@ namespace Product
             services.AddScoped<IStaffService, StaffService>();
             services.AddScoped<ICarouselService, CarouselService>();
             services.AddScoped<IReviewService, ReviewService>();
+            services.AddScoped<IFormService, FormService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
