@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
 
 namespace Admin.Models
 {
@@ -28,7 +30,7 @@ namespace Admin.Models
 
         [Display(Name = "Resim Url")]
         [MaxLength(200)]
-        public string ImageUrl { get; set; }
+        public IList<IFormFile> Photos { get; set; }
 
         [Display(Name = "Lokasyon")]
         [MaxLength(500)]

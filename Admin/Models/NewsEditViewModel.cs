@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
 
 namespace Admin.Models
 {
@@ -30,7 +32,7 @@ namespace Admin.Models
         public int StatusId { get; set; }
 
         [Display(Name = "Resim")]
-        public int ImageId { get; set; }
+        public IList<IFormFile> Photos{ get; set; }
 
         [Display(Name = "Kampüs")]
         public int CampusId { get; set; }

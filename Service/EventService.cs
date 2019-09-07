@@ -20,7 +20,7 @@ namespace Service
         {
             using (var db = new SchoolContext())
             {
-                return db.Events.Include(c=>c.Campus).Include(i=>i.Image).Include(s=>s.Status).FirstOrDefault(e => e.Id == id && e.Status.Id != (int)Statuses.Removed);
+                return db.Events.Include(c=>c.Campus).Include(s=>s.Status).FirstOrDefault(e => e.Id == id && e.Status.Id != (int)Statuses.Removed);
             }
         }
 
@@ -28,7 +28,7 @@ namespace Service
         {
             using (var db = new SchoolContext())
             {
-                return db.Events.Include(c=>c.Campus).Include(i=>i.Image).Include(s=>s.Status).FirstOrDefault(e => e.Slug == slug && e.Status.Id == (int)Statuses.Published);
+                return db.Events.Include(c=>c.Campus).Include(s=>s.Status).FirstOrDefault(e => e.Slug == slug && e.Status.Id == (int)Statuses.Published);
             }
         }
 
@@ -36,7 +36,7 @@ namespace Service
         {
             using (var db = new SchoolContext())
             {
-                return db.Events.Include(c=>c.Campus).Include(i=>i.Image).Include(s=>s.Status).Where(e => e.Status.Id != (int)Statuses.Removed).ToList();
+                return db.Events.Include(c=>c.Campus).Include(s=>s.Status).Where(e => e.Status.Id != (int)Statuses.Removed).ToList();
             }
         }
 
@@ -44,7 +44,7 @@ namespace Service
         {
             using (var db = new SchoolContext())
             {
-                return db.Events.Include(c=>c.Campus).Include(i=>i.Image).Include(s=>s.Status).Where(e => e.Status.Id == (int)Statuses.Published).ToList();
+                return db.Events.Include(c=>c.Campus).Include(s=>s.Status).Where(e => e.Status.Id == (int)Statuses.Published).ToList();
             }
         }
 

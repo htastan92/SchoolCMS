@@ -19,7 +19,7 @@ namespace Service
         {
             using (var db = new SchoolContext())
             {
-                return db.Campuses.Include(s=>s.Status).Include(i=>i.Image).FirstOrDefault(c => c.Id == id && c.Status.Id != (int)Statuses.Removed);
+                return db.Campuses.Include(s=>s.Status).FirstOrDefault(c => c.Id == id && c.Status.Id != (int)Statuses.Removed);
             }
         }
 

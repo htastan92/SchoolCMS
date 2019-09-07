@@ -10,7 +10,7 @@ namespace Data.Builders
         {
             builder.HasOne(s => s.Status).WithMany(e => e.Events).HasForeignKey(s => s.StatusId);
             builder.HasOne(c => c.Campus).WithMany(e => e.Events).HasForeignKey(c => c.CampusId);
-            builder.HasOne(i => i.Image).WithMany(e => e.Events).HasForeignKey(i => i.ImageId);
+
         }
     }
 }

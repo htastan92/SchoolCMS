@@ -1,4 +1,4 @@
-﻿@model HomepageViewModel
+﻿    @model HomepageViewModel
 @*<partial name="CarouselPartial" />*@
 @await Component.InvokeAsync("Carousel")
 <!-- Neden Erdem Okulları: Başlangıç -->
@@ -59,34 +59,6 @@
     </div>
 </div>
 <!-- Etkinlikler: Bitiş -->
-<!-- Veli Görüşleri: Başlangıç -->
-<div class="testimonial-area pt-110 pb-105 text-center">
-    <div class="container">
-        <div class="row">
-            <div class="testimonial-owl owl-theme owl-carousel">
-                @foreach (var review in Model.Reviews)
-                {
-                    <div class="col-md-8 col-md-offset-2 col-sm-12">
-                        <div class="single-testimonial">
-                            <div class="testimonial-info">
-                                <div class="testimonial-img">
-                                    <img src="@review.Image.Url" alt="testimonial">
-                                </div>
-                                <div class="testimonial-content">
-                                    <p>@review.Message</p>
-                                    <h4>@review.Fullname</h4>
-                                    <h5>@review.Title</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                }
-
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Veli Görüşleri: Bitiş -->
 <!-- Haberler: Başlangıç -->
 <div class="blog-area pt-150 pb-150">
     <div class="container">
@@ -105,7 +77,7 @@
                     <div class="single-blog">
                         <div class="blog-img">
                             <a href="blog-details.html">
-                                <img src="@news.Image.Url" alt="@news.Name">
+                                <img src="@news.ImageUrl" alt="@news.Name">
                             </a>
                             <div class="blog-hover">
                                 <a href="blog-details.html">

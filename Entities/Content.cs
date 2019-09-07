@@ -14,8 +14,7 @@ namespace Entities
         public int StatusId { get; set; }
         public Status Status { get; set; }
 
-        public int ImageId { get; set; }
-        public Image Image { get; set; }
+        public string ImageUrl { get; set; }
 
         public DateTime? CreationDate { get; set; }
         public DateTime? EditDate { get; set; }

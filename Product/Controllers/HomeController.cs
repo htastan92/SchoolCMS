@@ -78,7 +78,7 @@ namespace Product.Controllers
                 EditorContent = findCampus.EditorContent,
                 EmailAddress = findCampus.EmailAddress,
                 Fax = findCampus.Fax,
-                ImageUrl = findCampus.Image.Url,
+                ImageUrl = findCampus.ImageUrl,
                 Telephone = findCampus.Telephone,
                 Events = findCampus.Events.ToList(),
                 News = findCampus.News.OrderByDescending(n => n.CreationDate).Take(5).ToList(),
@@ -103,7 +103,7 @@ namespace Product.Controllers
                 Name = findPage.Name,
                 EditorContent = findPage.EditorContent,
                 Description = findPage.Description,
-                ImageUrl = findPage.Image.Url
+                ImageUrl = findPage.ImageUrl
             };
 
             return View(viewModel);
@@ -136,7 +136,7 @@ namespace Product.Controllers
             {
                 EditorContent = findEvent.EditorContent,
                 Description = findEvent.Description,
-                ImageUrl = findEvent.Image.Url,
+                ImageUrl = findEvent.ImageUrl,
                 Name = findEvent.Name,
                 Categories = findCategoriesOfEvent,
                 CampusId = findEvent.Campus.Id,
@@ -175,7 +175,7 @@ namespace Product.Controllers
             {
                 Name = findNews.Name,
                 Description = findNews.Description,
-                ImageUrl = findNews.Image.Url,
+                ImageUrl = findNews.ImageUrl,
                 EditorContent = findNews.EditorContent,
                 Categories = findCategoriesOfNews
             };

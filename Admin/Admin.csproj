@@ -1772,6 +1772,7 @@
 
   <ItemGroup>
     <Folder Include="Views\Login\" />
+    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
 </Project>

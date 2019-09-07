@@ -15,7 +15,7 @@ namespace Service
             _unitOfWork = unitOfWork;
         }
 
-        public Page GetAdmin(int id)
+        public Page GetAdmin(int? id)
         {
             using (var db = new SchoolContext())
             {
@@ -69,7 +69,7 @@ namespace Service
             return page.Id;
         }
 
-        public bool Publish(int id)
+        public bool Publish(int? id)
         {
             try
             {
@@ -89,7 +89,7 @@ namespace Service
             }
         }
 
-        public bool Draft(int id)
+        public bool Draft(int? id)
         {
             try
             {
@@ -109,7 +109,7 @@ namespace Service
             }
         }
 
-        public bool Delete(int id)
+        public bool Delete(int? id)
         {
             try
             {
@@ -132,15 +132,15 @@ namespace Service
 
     public interface IPageService
     {
-        Page GetAdmin(int id);
+        Page GetAdmin(int? id);
         Page GetWeb(string slug);
         IList<Page> GetAllAdmin();
         IList<Page> GetAllWeb();
         int New(Page page);
         int Edit(Page page);
-        bool Publish(int id);
-        bool Draft(int id);
-        bool Delete(int id);
+        bool Publish(int? id);
+        bool Draft(int? id);
+        bool Delete(int? id);
 
     }
 }

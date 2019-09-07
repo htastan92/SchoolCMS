@@ -9,7 +9,7 @@ namespace Data.Builders
         public void Configure(EntityTypeBuilder<Carousel> builder)
         {
             builder.HasOne(s => s.Status).WithMany(c => c.Carousels).HasForeignKey(s => s.StatusId);
-            builder.HasOne(s => s.Image).WithMany(c => c.Carousels).HasForeignKey(s => s.ImageId);
+           
         }
     }
 }

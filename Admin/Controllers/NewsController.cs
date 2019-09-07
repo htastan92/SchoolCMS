@@ -1,6 +1,10 @@
-﻿using Admin.Helper;
+﻿using System;
+using System.IO;
+using Admin.Helper;
 using Admin.Models;
 using Entities;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Service;
 
@@ -10,10 +14,12 @@ namespace Admin.Controllers
     public class NewsController : Controller
     {
         private readonly INewsService _newsService;
+        private readonly IHostingEnvironment _hostingEnvironment;
 
-        public NewsController(INewsService newsService)
+        public NewsController(INewsService newsService, IHostingEnvironment hostingEnvironment)
         {
             _newsService = newsService;
+            _hostingEnvironment = hostingEnvironment;
         }
 
         public IActionResult Index()
@@ -25,6 +31,7 @@ namespace Admin.Controllers
             return View(viewModel);
         }
 
+        [HttpGet]
         public IActionResult New()
         {
             return View();
@@ -35,25 +42,47 @@ namespace Admin.Controllers
         {
             if (!ModelState.IsValid)
                 return View(viewModel);
+            string uniqueFileName = null;
+            if (viewModel.Photos != null && viewModel.Photos.Count > 0)
+            {
+                foreach (IFormFile photo in viewModel.Photos)
+                {
+                    var extension = Path.GetExtension(photo.FileName).ToLower();
+                    if (extension == ".jpg" || extension == ".jpeg" || extension == ".png")
+                    {
+                        string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "images");
+                        uniqueFileName = Guid.NewGuid().ToString() + "_" + photo.FileName;
+                        string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                        photo.CopyTo(new FileStream(filePath, FileMode.Create));
+                    }
+                    else
+                    {
+                        throw new Exception("Dosya türü .JPG , .JPEG veya .PNG olmalıdır..");
+                    }
 
+                }
+            }
             News newNews = new News()
             {
                 Name = viewModel.Name,
                 Description = viewModel.Description,
                 EditorContent = viewModel.EditorContent,
                 Slug = viewModel.Slug,
-                ImageId = viewModel.ImageId,
-                StatusId = viewModel.StatusId
+                ImageUrl = uniqueFileName,
+                StatusId = viewModel.StatusId,
+                CampusId = viewModel.CampusId
             };
             _newsService.New(newNews);
             return RedirectToAction("Index");
         }
-
+        [HttpGet]
         public IActionResult Edit(int? id)
         {
             if (id == null)
                 return RedirectToAction("Index");
+
             var findNews = _newsService.GetAdmin(id);
+
             if (findNews == null) 
                 return RedirectToAction("Index");
 
@@ -64,8 +93,9 @@ namespace Admin.Controllers
                  Description = findNews.Description,
                  EditorContent = findNews.EditorContent,
                  Slug = findNews.Slug,
-                 ImageId = findNews.ImageId,
-                 StatusId = findNews.StatusId
+                 StatusId = findNews.StatusId,
+                 CampusId = findNews.CampusId
+                 
             };
             return View(viewModel);
         }
@@ -75,7 +105,26 @@ namespace Admin.Controllers
         {
             if (!ModelState.IsValid)
                 return View(viewModel);
+            string uniqueFileName = null;
+            if (viewModel.Photos != null && viewModel.Photos.Count > 0)
+            {
+                foreach (IFormFile photo in viewModel.Photos)
+                {
+                    var extension = Path.GetExtension(photo.FileName).ToLower();
+                    if (extension == ".jpg" || extension == ".jpeg" || extension == ".png")
+                    {
+                        string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "images");
+                        uniqueFileName = Guid.NewGuid().ToString() + "_" + photo.FileName;
+                        string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                        photo.CopyTo(new FileStream(filePath, FileMode.Create));
+                    }
+                    else
+                    {
+                        throw new Exception("Dosya türü .JPG , .JPEG veya .PNG olmalıdır..");
+                    }
 
+                }
+            }
             News editedNews = new News()
             {
                 Id = viewModel.Id,
@@ -83,8 +132,9 @@ namespace Admin.Controllers
                 Description = viewModel.Description,
                 Slug = viewModel.Slug,
                 EditorContent = viewModel.EditorContent,
-                ImageId = viewModel.ImageId,
-                StatusId = viewModel.StatusId
+                ImageUrl =uniqueFileName,
+                StatusId = viewModel.StatusId,
+                CampusId = viewModel.CampusId
             };
             _newsService.Edit(editedNews);
             return RedirectToAction("Index");
