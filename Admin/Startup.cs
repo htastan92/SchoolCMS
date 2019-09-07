@@ -48,6 +48,7 @@ namespace Admin
             services.AddScoped<IStatusService, StatusService>();
             services.AddScoped<INewsService, NewsService>();
             services.AddScoped<IPageService, PageService>();
+            services.AddScoped<ICarouselService, CarouselService>();
 
             services.AddSession(options =>
             {

@@ -4,7 +4,7 @@
     ViewBag.Title = "Kampüs Düzenle";
 }
 
-@using (@Html.BeginForm())
+@using (Html.BeginForm("New", "Campus", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.HiddenFor(model => model.Id)
     <div class="form-horizontal">

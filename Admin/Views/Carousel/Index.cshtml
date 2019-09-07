@@ -1,0 +1,42 @@
+﻿@model CarouselListViewModel
+
+@{
+    ViewBag.Title = "Karoseller";
+}
+<p>
+    @Html.ActionLink("Yeni Karosel", "New", "Carousel", null, new { @class = "btn btn-primary" })
+</p>
+
+<table class="table table-bordered" id="dataTable">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Adı</th>
+            <th>Durumu</th>
+            <th nowrap>Eylemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Carousels)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Title</td>
+                <td>@item.Status.Name</td>
+                <td>
+                    <a href="@Url.Action("Edit", new {id = item.Id})" class="btn btn-success btn-sm">Düzenle</a>
+                    <a href="@Url.Action("Draft", new {id = item.Id})" class="btn btn-warning btn-sm">Taslak</a>
+                    <a href="@Url.Action("Publish", new {id = item.Id})" class="btn btn-info btn-sm">Yayınla</a>
+                    <a href="@Url.Action("Remove", new {id = item.Id})" class="btn btn-danger btn-sm" onclick="return confirm('Bu kaydı silmek istediğinize emin misiniz?');">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Javascript
+{
+    <script src="@Url.Content("~/Assets/vendor/datatables/jquery.dataTables.js")"></script>
+    <script src="@Url.Content("~/Assets/vendor/datatables/dataTables.bootstrap4.js")"></script>
+    <script src="@Url.Content("~/Assets/js/demo/datatables-demo.js")"></script>
+}

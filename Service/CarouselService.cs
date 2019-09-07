@@ -30,7 +30,7 @@ namespace Service
         {
             using (var db = new SchoolContext())
             {
-                return db.Carousels
+                return db.Carousels.Include(x=>x.Status)
                     .Where(c => c.Status.Id != (int)Statuses.Removed)
                     .ToList();
             }

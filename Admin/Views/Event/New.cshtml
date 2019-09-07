@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Yeni Etkinlik";
 }
-@using (@Html.BeginForm())
+@using (Html.BeginForm("New", "Campus", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <div class="form-horizontal">
 
