@@ -15,7 +15,27 @@
                 <div class="col-md-9 col-sm-9 col-xs-12">
                     <div class="content-wrapper one">
                         <!-- Main Menu Start -->
-          
+                        <div class="main-menu one text-right">
+                            <nav>
+                                <ul>
+                                    <li>
+                                        <a href="@Url.Action("Index","Home")">Anasayfa</a>
+                                    </li>
+                                    <li><a href="@Url.Action("About","Home")">Hakkımızda</a></li>
+                                    
+                                    <li>
+                                        <a href="@Url.Action("EventList","Home")">Etkinlikler</a>
+                                        <ul>
+                                            <li><a href="@Url.Action("EventList","Home")">Etkinlikler</a></li>
+                                            <li><a href="@Url.Action("EventDetail","Home")">Etkinlik Detayları</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="@Url.Action("Contact","Home")">Bize Ulaşın</a></li>
+                       
+                                </ul>
+                            </nav>
+                        </div>
+                        <div class="mobile-menu hidden-lg hidden-md one"></div>
                         <!-- Main Menu End -->
                     </div>
                 </div>
@@ -24,3 +44,4 @@
     </div>
 </header>
 <!-- Header Area End -->
+

@@ -94,7 +94,7 @@ namespace Admin.Controllers
             };
             return View(viewModel);
         }
-
+        [HttpPost]
         public IActionResult Edit(CarouselEditViewModel viewModel)
         {
             if (!ModelState.IsValid)

@@ -88,6 +88,10 @@ namespace Product.Controllers
             return View(viewModel);
         }
 
+        public IActionResult About()
+        {
+            return View();
+        }
         [Route("sayfa/{pageSlug}")]
         public IActionResult PageDetail(string pageSlug)
         {
