@@ -76,11 +76,11 @@
                 <div class="col-md-4 col-sm-6 col-xs-12">
                     <div class="single-blog">
                         <div class="blog-img">
-                            <a href="blog-details.html">
+                            <a href="news-details.html">
                                 <img src="@news.ImageUrl" alt="@news.Name">
                             </a>
                             <div class="blog-hover">
-                                <a href="blog-details.html">
+                                <a href="news-details.html">
                                     <i class="fa fa-link"></i>
                                 </a>
                             </div>
@@ -90,8 +90,8 @@
                                 <p>@news.CreationDate?.ToString("dd MMMM yyyy")</p>
                             </div>
                             <div class="blog-bottom">
-                                <h2><a href="blog-details.html">@news.Description.Substring(0, 40)... </a></h2>
-                                <a href="blog-details.html">devamını oku</a>
+                                @*<h2><a href="news-details.html">@news.Description.Substring(0, 25)... </a></h2>*@
+                                <a href="news-details.html">devamını oku</a>
                             </div>
                         </div>
                     </div>

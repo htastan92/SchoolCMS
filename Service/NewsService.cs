@@ -35,7 +35,7 @@ namespace Service
         {
             using (var db = new SchoolContext())
             {
-                return db.News.Where(n => n.Status.Id != (int)Statuses.Removed).ToList();
+                return db.News.Include(s=>s.Status).Include(c=>c.Campus).Where(n => n.Status.Id != (int)Statuses.Removed).ToList();
             }
         }
 

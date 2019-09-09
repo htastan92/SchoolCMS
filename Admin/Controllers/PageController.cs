@@ -24,7 +24,11 @@ namespace Admin.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var viewModel = new PageListViewModel()
+            {
+                Pages = _pageService.GetAllAdmin()
+            };
+            return View(viewModel);
         }
         [HttpGet]
         public IActionResult New()

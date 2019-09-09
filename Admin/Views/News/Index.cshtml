@@ -25,10 +25,10 @@
                 <td>@x.Status.Name</td>
                 <td>@x.Campus.Name</td>
                 <td>
-                    <a href="@Url.Action("Edit", "Event", new {id = @x.Id})" class="btn btn-success">Düzenle</a>
-                    <a href="@Url.Action("Remove", "Event", new {id = @x.Id})" class="btn btn-danger">Sil</a>
-                    <a href="@Url.Action("Draft", "Event", new {id = @x.Id})" class="btn btn-warning">Taslak Yap</a>
-                    <a href="@Url.Action("Publish", "Event", new {id = @x.Id})" class="btn btn-info">Yayınla</a>
+                    <a href="@Url.Action("Edit", "News", new {id = @x.Id})" class="btn btn-success">Düzenle</a>
+                    <a href="@Url.Action("Remove", "News", new {id = @x.Id})" class="btn btn-danger">Sil</a>
+                    <a href="@Url.Action("Draft", "News", new {id = @x.Id})" class="btn btn-warning">Taslak Yap</a>
+                    <a href="@Url.Action("Publish", "News", new {id = @x.Id})" class="btn btn-info">Yayınla</a>
                 </td>
             </tr>
         }

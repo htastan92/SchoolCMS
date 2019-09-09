@@ -15,18 +15,21 @@ namespace Admin.Controllers
     {
         private readonly INewsService _newsService;
         private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly IStatusService _statusService;
 
-        public NewsController(INewsService newsService, IHostingEnvironment hostingEnvironment)
+        public NewsController(INewsService newsService, IHostingEnvironment hostingEnvironment, IStatusService statusService)
         {
             _newsService = newsService;
             _hostingEnvironment = hostingEnvironment;
+            _statusService = statusService;
         }
 
         public IActionResult Index()
         {
             NewsListViewModel viewModel = new NewsListViewModel()
             {
-                News = _newsService.GetAllAdmin()
+                News = _newsService.GetAllAdmin(),
+                Statuses = _statusService.GetAll()
             };
             return View(viewModel);
         }
