@@ -164,15 +164,17 @@ textarea {
     transition: all 0.5s ease-out 0s;
 }
 .banner-area {
-  background: rgba(0, 0, 0, 0) url("../img/banner/banner.jpg") no-repeat scroll center center / cover ;
-  position: relative;
-  width: 100%;
-  z-index: 1;
+    background: rgba(0, 0, 0, 0) url("../img/about/photo-1485322551133-3a4c27a9d925.jpg") no-repeat scroll center center / cover;
+    position: relative;
+    width: 100%;
+   
 }
 .banner-content {
     padding: 132px 0 134px;
 }
-.banner-content h2{
+
+
+.banner-content h2 {
     font-size: 40px;
     color: #fff;
     font-family: 'Open Sans', sans-serif;
@@ -1179,7 +1181,7 @@ textarea {
 }
 .notice-left h3, .notice-left-wrapper h3, .notice-right-wrapper h3{
     font-family: 'Open Sans', sans-serif;
-    font-size: 800;
+    font-size: 800px;
     color: #2c2b5e;
     font-size: 28px;
     text-transform: uppercase;
@@ -1264,7 +1266,7 @@ textarea {
 /*  5. Choose CSS
 /*----------------------------------------*/
 .choose-area{
-    background: url(../img/choose/choose-bd.jpg);
+    
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
@@ -1280,17 +1282,17 @@ textarea {
     content: "";
     background: rgba(44, 43, 94, 0.9);
 }
-.choose-area:before{
-    position: absolute;
-    right: 130px;
-    bottom: 0;
-    width: 293px;
-    height: 506px;
-    content: "";
-    background: url(../img/choose/choose.png);
-    background-repeat: no-repeat;
-    z-index: 1;
-}
+    .choose-area:before {
+        position: absolute;
+        right: 130px;
+        bottom: 0;
+        width: 293px;
+        height: 506px;
+        content: "";
+        background: url(../img/photo-1508824623134-da66caa91eca.jpg);
+        background-repeat: no-repeat;
+        z-index: 1;
+    }
 .choose-content{
     position: relative;
     z-index: 1;

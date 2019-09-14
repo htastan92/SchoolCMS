@@ -14,20 +14,18 @@ namespace Product.Controllers
         private readonly IPageService _pageService;
         private readonly IEventService _eventService;
         private readonly INewsService _newsService;
-        private readonly IMenuService _menuService;
         private readonly ICarouselService _carouselService;
         private readonly IReviewService _reviewService;
         private readonly IFormService _formService;
 
         public HomeController(INewsService newsService, IEventService eventService,
-            IPageService pageService, ICampusService campusService, IMenuService menuService,
+            IPageService pageService, ICampusService campusService,
             ICarouselService carouselService, IReviewService reviewService,IFormService formService)
         {
             _newsService = newsService;
             _eventService = eventService;
             _pageService = pageService;
             _campusService = campusService;
-            _menuService = menuService;
             _carouselService = carouselService;
             _reviewService = reviewService;
             _formService = formService;
@@ -138,6 +136,7 @@ namespace Product.Controllers
 
             EventDetailViewModel viewModel = new EventDetailViewModel
             {
+                Slug = findEvent.Slug,
                 EditorContent = findEvent.EditorContent,
                 Description = findEvent.Description,
                 ImageUrl = findEvent.ImageUrl,

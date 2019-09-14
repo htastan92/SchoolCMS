@@ -4,7 +4,7 @@
     ViewBag.Title = "Karosel Düzenle";
 }
 
-@using (Html.BeginForm("New", "Carousel", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Edit", "Carousel", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.HiddenFor(model => model.Id)
     <div class="form-horizontal">

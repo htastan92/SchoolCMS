@@ -27,7 +27,7 @@ namespace Admin.Helper
             IEnumerable<EventCategory> eventCategories;
             using (SchoolContext db = new SchoolContext())
             {
-                eventCategories = db.EventCategories.ToList();
+                eventCategories = db.EventCategories.Where(c => c.StatusId != (int)Statuses.Removed).ToList();
             }
 
             SelectList eventCategoryList = new SelectList(eventCategories, "Id", "Name");
@@ -38,7 +38,7 @@ namespace Admin.Helper
             IEnumerable<NewsCategory> newsCategories;
             using (SchoolContext db = new SchoolContext())
             {
-                newsCategories = db.NewsCategories.ToList();
+                newsCategories = db.NewsCategories.Where(c => c.StatusId != (int)Statuses.Removed).ToList();
             }
 
             SelectList newsCategoryList = new SelectList(newsCategories, "Id", "Name");
@@ -49,7 +49,7 @@ namespace Admin.Helper
             IEnumerable<Campus> campuses;
             using (SchoolContext db = new SchoolContext())
             {
-                campuses = db.Campuses.ToList();
+                campuses = db.Campuses.Where(c=>c.StatusId != (int)Statuses.Removed).ToList();
             }
 
             SelectList campuSelectList = new SelectList(campuses, "Id", "Name");
@@ -61,7 +61,7 @@ namespace Admin.Helper
             IEnumerable<MenuElement> menuElements;
             using (SchoolContext db = new SchoolContext())
             {
-                menuElements = db.MenuElements.ToList();
+                menuElements = db.MenuElements.Where(c => c.StatusId != (int)Statuses.Removed).ToList();
             }
 
             SelectList menuElementList = new SelectList(menuElements, "Id", "Name");

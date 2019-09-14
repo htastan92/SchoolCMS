@@ -20,11 +20,9 @@
   <ItemGroup>
     <Folder Include="wwwroot\css\" />
     <Folder Include="wwwroot\fonts\" />
-    <Folder Include="wwwroot\img\about\" />
     <Folder Include="wwwroot\img\banner\" />
     <Folder Include="wwwroot\img\blog\" />
     <Folder Include="wwwroot\img\choose\" />
-    <Folder Include="wwwroot\img\contact\" />
     <Folder Include="wwwroot\img\course\" />
     <Folder Include="wwwroot\img\event\" />
     <Folder Include="wwwroot\img\footer\" />

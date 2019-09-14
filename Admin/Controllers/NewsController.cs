@@ -71,6 +71,7 @@ namespace Admin.Controllers
                 Description = viewModel.Description,
                 EditorContent = viewModel.EditorContent,
                 Slug = viewModel.Slug,
+                CreationDate = DateTime.Now,
                 ImageUrl = uniqueFileName,
                 StatusId = viewModel.StatusId,
                 CampusId = viewModel.CampusId

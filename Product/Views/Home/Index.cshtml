@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-left-4 col-sm-8 col-md-offset-left-4">
-                <div class="choose-content text-left">
+                <div class="choose-content text-left" >
                     <h2>NEDEN ERDEM OKULLARI ?</h2>
                     <p>Lorem Ipsum, dizgi ve baskı endüstrisinde kullanılan mıgır metinlerdir. Lorem Ipsum, adı bilinmeyen bir matbaacının bir hurufat numune kitabı oluşturmak üzere bir yazı galerisini alarak karıştırdığı 1500'lerden beri endüstri standardı sahte metinler olarak kullanılmıştır.</p>
                     <p class="choose-option">Beşyüz yıl boyunca varlığını sürdürmekle kalmamış, aynı zamanda pek değişmeden elektronik dizgiye de sıçramıştır. 1960'larda Lorem Ipsum pasajları da içeren Letraset yapraklarının yayınlanması ile ve yakın zamanda Aldus PageMaker gibi Lorem Ipsum sürümleri içeren masaüstü yayıncılık yazılımları ile popüler olmuştur. </p>
@@ -35,22 +35,20 @@
                     <div class="single-event mb-35">
                         <div class="event-date">
                             <h3>
-                                <a href="event-details.html">
-                                    @eventItem.StartDate.Day <span>@eventItem.StartDate.Month.ToString("MMMM")</span>
-                                </a>
+                                <a href="@Url.Action("EventDetail",new {eventSlug = eventItem.Slug , page =(int?) null})">
+                                        @eventItem.StartDate.Day <span>@eventItem.StartDate.Month.ToString("G")</span>
+                                    </a>
                             </h3>
                         </div>
                         <div class="event-content text-left">
                             <div class="event-content-left">
-                                <h4><a href="event-details.html">@eventItem.Name</a></h4>
+                                <h4><a href="@Url.Action("EventDetail",new {eventSlug = eventItem.Slug , page =(int?) null})">@eventItem.Name</a></h4>
                                 <ul>
                                     <li><i class="fa fa-clock-o"></i>@eventItem.StartDate.Hour:@eventItem.StartDate.Minute</li>
                                     <li><i class="fa fa-map-marker"></i>@eventItem.Location</li>
                                 </ul>
                             </div>
-                            <div class="event-content-right">
-                                <a class="default-btn" href="event-details.html">detayları gör</a>
-                            </div>
+                         
                         </div>
                     </div>
                 </div>
@@ -73,25 +71,27 @@
         <div class="row">
             @foreach (var news in Model.LastNews)
             {
+   
                 <div class="col-md-4 col-sm-6 col-xs-12">
                     <div class="single-blog">
                         <div class="blog-img">
-                            <a href="news-details.html">
-                                <img src="@news.ImageUrl" alt="@news.Name">
+                            <a href="@Url.Action("NewsDetail",new{newsSlug=news.Slug,page=(int?) null})">
+                                <img src="/img/indir.jpg" class="card-img-top " alt="@news.Description">
                             </a>
                             <div class="blog-hover">
-                                <a href="news-details.html">
+                                <a href="@Url.Action("NewsDetail",new{newsSlug=news.Slug,page=(int?) null})">
                                     <i class="fa fa-link"></i>
                                 </a>
                             </div>
                         </div>
                         <div class="blog-content">
                             <div class="blog-top">
-                                <p>@news.CreationDate?.ToString("dd MMMM yyyy")</p>
+                                <p>@news.CreationDate?.ToString("MM/dd/yyyy")</p>
                             </div>
+                            <h5>@news.Description</h5>
                             <div class="blog-bottom">
                                 @*<h2><a href="news-details.html">@news.Description.Substring(0, 25)... </a></h2>*@
-                                <a href="news-details.html">devamını oku</a>
+                                <a href="@Url.Action("NewsDetail",new{newsSlug=news.Slug,page=(int?) null})">devamını oku</a>
                             </div>
                         </div>
                     </div>
